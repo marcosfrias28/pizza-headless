@@ -1,0 +1,37 @@
+---
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+---
+
+<header class="bg-white min-w-full">
+    <nav
+        class="w-max lg:flex items-center container mx-auto min-h-[138px]"
+    >
+        <div class="flex w-full lg:w-auto justify-between items-center gap-10">
+            <Astronav closeOnClick>
+                <div class="">
+                    <a><img src="/logo.svg" alt="" /></a>
+                    <div class="block lg:hidden">
+                        <MenuIcon class="w-4 h-4 text-gray-800" />
+                    </div>
+                </div>
+                <MenuItems class="hidden lg:flex">
+                    <ul class="flex flex-col lg:flex-row lg:gap-5">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/">Menu</a>
+                        </li>
+                        <li>
+                            <a href="/">Our Restaurant</a>
+                        </li>
+                        <li>
+                            <a href="/">Blog</a>
+                        </li>
+                    </ul>
+                </MenuItems>
+            </Astronav>
+        </div>
+        <div></div>
+    </nav>
+</header>
