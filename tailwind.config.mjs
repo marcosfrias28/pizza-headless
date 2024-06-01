@@ -5,6 +5,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'pattaya': ['Pattaya', 'sans-serif'],
+				'montserrat': ['Montserrat', 'sans-serif']
 			},
 			width: {
 				'max': "1325px"
