@@ -1,18 +1,19 @@
 ---
+import Vector from "../../public/Vector.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Pizza Headless.">
-	<main class="w-full mx-auto">
+	<main class="w-full relative">
 		<section
 			id="hero-section"
-			class="flex flex-row flex-wrap justify-between"
+			class="w-full md:w-max flex flex-row flex-wrap justify-between mx-auto mt-14"
 		>
 			<div class="max-w-2xl">
 				<small class="text-2xl font-pattaya text-bright-sun-300"
 					>Based in Italy</small
 				>
-				<h1 class="flex flex-col text-[65px]">
+				<h1 class="flex flex-col text-[65px] font-bold">
 					<span>Artisan Pizzas,</span>
 					<span>Crafted with Care</span>
 				</h1>
@@ -21,7 +22,10 @@ import Layout from "../layouts/Layout.astro";
 					Morbi eu cursus nisi. Nunc consectetur ipsum pharetra,
 					congue odio quis, porttitor ligula. Vestibulum viverra.
 				</p>
-				<button>Check the menu</button>
+				<button
+					class="rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+					>Check the menu</button
+				>
 			</div>
 			<picture>
 				<img
@@ -30,10 +34,133 @@ import Layout from "../layouts/Layout.astro";
 				/>
 			</picture>
 		</section>
-		<section
-			id="pizza-order"
-			class="bg-[url(/herobg.svg)] bg-auto bg-center bg-no-repeat"
-		>
+		<section id="pizza-order" class="relative">
+			<div
+				class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-16 h-[557px] w-full"
+			>
+			</div>
+			<section
+				id="cards"
+				class="w-full md:w-max mx-auto mt-14 flex flex-col md:flex-row justify-between"
+			>
+				<article
+					id="productcard"
+					class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-xl shadow-black/25 shadow-lg overflow-hidden"
+				>
+					<div class="h-1/2">
+						<img
+							src="/pizzaexample.webp"
+							alt=""
+							class="fixed -top-1/2"
+						/>
+					</div>
+					<div class="mx-8">
+						<div class="flex flex-row justify-between gap-10">
+							<span class="text-black font-semibold"
+								>Margherita</span
+							><span class="text-red-500 font-semibold"
+								>7.50 €</span
+							>
+						</div>
+						<small class="text-gray-500">Pomodoro, Mozzarella</small
+						>
+					</div>
+
+					<button
+						class="flex flex-row flex-nowrap justify-center items-center gap-2 rounded-lg px-7 py-3 mx-14 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+					>
+						<span>Add to order</span><Vector /></button
+					>
+				</article>
+				<article
+					id="productcard"
+					class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-xl shadow-black/25 shadow-lg overflow-hidden"
+				>
+					<div class="h-1/2">
+						<img
+							src="/pizzaexample.webp"
+							alt=""
+							class="fixed -top-1/2"
+						/>
+					</div>
+					<div class="mx-8">
+						<div class="flex flex-row justify-between gap-10">
+							<span class="text-black font-semibold"
+								>Margherita</span
+							><span class="text-red-500 font-semibold"
+								>7.50 €</span
+							>
+						</div>
+						<small class="text-gray-500">Pomodoro, Mozzarella</small
+						>
+					</div>
+
+					<button
+						class="flex flex-row flex-nowrap justify-center items-center gap-2 rounded-lg px-7 py-3 mx-14 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+					>
+						<span>Add to order</span><Vector /></button
+					>
+				</article>
+				<article
+					id="productcard"
+					class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-xl shadow-black/25 shadow-lg overflow-hidden"
+				>
+					<div class="h-1/2">
+						<img
+							src="/pizzaexample.webp"
+							alt=""
+							class="fixed -top-1/2"
+						/>
+					</div>
+					<div class="mx-8">
+						<div class="flex flex-row justify-between gap-10">
+							<span class="text-black font-semibold"
+								>Margherita</span
+							><span class="text-red-500 font-semibold"
+								>7.50 €</span
+							>
+						</div>
+						<small class="text-gray-500">Pomodoro, Mozzarella</small
+						>
+					</div>
+
+					<button
+						class="flex flex-row flex-nowrap justify-center items-center gap-2 rounded-lg px-7 py-3 mx-14 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+					>
+						<span>Add to order</span><Vector /></button
+					>
+				</article>
+				<article
+					id="productcard"
+					class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-xl shadow-black/25 shadow-lg overflow-hidden"
+				>
+					<div class="h-1/2">
+						<img
+							src="/pizzaexample.webp"
+							alt=""
+							class="fixed -top-1/2"
+						/>
+					</div>
+					<div class="mx-8">
+						<div class="flex flex-row justify-between gap-10">
+							<span class="text-black font-semibold"
+								>Margherita</span
+							><span class="text-red-500 font-semibold"
+								>7.50 €</span
+							>
+						</div>
+						<small class="text-gray-500">Pomodoro, Mozzarella</small
+						>
+					</div>
+
+					<button
+						class="flex flex-row flex-nowrap justify-center items-center gap-2 rounded-lg px-7 py-3 mx-14 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+					>
+						<span>Add to order</span><Vector /></button
+					>
+				</article>
+			</section>
 		</section>
+		
 	</main>
 </Layout>
