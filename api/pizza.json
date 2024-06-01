@@ -1,8 +1,6 @@
-{
-    "pizze": [
+[
       {
-        "pizza_id": 1,
-        "nome": "Margherita",
+        "pbome": "Margherita",
         "price": 5.00
       },
       {
@@ -51,5 +49,3 @@
         "price": 7.50
       }
     ]
-  }
-  

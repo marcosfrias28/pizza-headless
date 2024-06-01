@@ -34,14 +34,14 @@ import Layout from "../layouts/Layout.astro";
 				/>
 			</picture>
 		</section>
-		<section id="pizza-order" class="relative">
+		<section id="pizza-order" class="relative mx-auto w-full">
 			<div
 				class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-16 h-[557px] w-full"
 			>
 			</div>
 			<section
 				id="cards"
-				class="w-full md:w-max mx-auto mt-14 flex flex-col md:flex-row justify-between"
+				class="w-auto max-w-max gap-6 mx-auto mt-14 flex flex-col md:flex-row flex-wrap"
 			>
 				<article
 					id="productcard"
@@ -161,6 +161,5 @@ import Layout from "../layouts/Layout.astro";
 				</article>
 			</section>
 		</section>
-		
 	</main>
 </Layout>

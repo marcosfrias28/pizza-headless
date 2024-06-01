@@ -1,0 +1,12 @@
+
+//Che mi dia tutte le pizze
+GET http://localhost:1234/api/pizza
+
+//Che mi dia la pizza con id 1
+GET http://localhost:1234/api/pizza/1
+
+//Che mi dia tutte le pizze con il nome "Margherita"
+GET http://localhost:1234/api/pizza?name=Margherita
+
+//Che mi dia tutte le pizze con il prezzo minore di 5
+GET http://localhost:1234/api/pizza?price=5
