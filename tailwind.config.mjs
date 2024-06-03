@@ -10,6 +10,9 @@ export default {
 			width: {
 				'max': "1325px"
 			},
+			maxWidth: {
+				'max': "1325px"
+			},
 			colors: {
 				'bridal-heath': {
 					'50': '#fff8f2',
