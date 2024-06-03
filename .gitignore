@@ -4,6 +4,8 @@ dist/
 # generated types
 .astro/
 
+models/app.http
+
 # dependencies
 node_modules/
 
