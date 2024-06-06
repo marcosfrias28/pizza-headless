@@ -1,25 +1,55 @@
-const express = require('express');
-const pizza = require('../api/pizza.json');
-
+import express, { json } from 'express';
+import pizza from '../api/pizza.json' assert { type: "json" } ;
+import cors from 'cors';
+import { z } from 'astro/zod';
+import { validatePizza } from './schema/pizzaSchema.js';
 
 const app = express();
-const PORT = process.env.PORT || 1234;
+const PORT = process.env.PORT || 4322;
 
 app.disable('x-powered-by'); // Disable the x-powered-by header
 
 // Middleware per il parsing dei JSON
-app.use(express.json())
+app.use(json())
+app.use(cors())
 
-app.get ('/api/', (req, res) => {
-    res.json({messsage: 'Hello World!'});
-})
-
-app.get ('/api/pizza', (req, res) => {
+app.get('/api/pizza', (req, res) => {
+    const {name, ingredients} = req.query;
+    if (name) {
+        const pizzaByName = pizza.filter(pizza => pizza.name.includes(name));
+        return res.json(pizzaByName);
+    }
+    if (ingredients) {
+        const pizzaByIngredients = pizza.filter(pizza => pizza.ingredients.some(ingredient => ingredient.toLowerCase() === ingredients.toLowerCase()));
+        return res.json(pizzaByIngredients);
+    }
     res.json(pizza);
+    res.status(200);
 })
 
-app.use('', (req,res) => {
-    res.status(404).send('<h1>404 NOT FOUND<h1/>Route not found');
+app.post('/api/pizza', (req, res) => {
+const result = validatePizza(req.body);
+if (!result.success) {
+    return res.status(400).json({message: 'Invalid pizza', errors: result.error});
+} else {
+    res.status(201).json({message: 'Pizza created successfully'});
+
+}
+const newPizza = {
+    id: pizza.length + 1,
+    ...result.data
+}
+pizza.push(newPizza);
+
+})
+
+app.get('/api/pizza/:id', (req, res) => {
+    const { id } = req.params;
+    const pizzaId = pizza.find(pizza => pizza.id === Number(id));
+    console.log(pizzaId);
+    if (pizzaId) return res.json(pizzaId);
+
+    res.status(404).json({message: 'Pizza not found'});
 })
 
 app.listen(PORT, ()=> {

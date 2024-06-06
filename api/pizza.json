@@ -1,51 +1,72 @@
 [
-      {
-        "pbome": "Margherita",
-        "price": 5.00
-      },
-      {
-        "pizza_id": 2,
-        "nome": "Marinara",
-        "price": 4.50
-      },
-      {
-        "pizza_id": 3,
-        "nome": "Quattro Stagioni",
-        "price": 7.50
-      },
-      {
-        "pizza_id": 4,
-        "nome": "Prosciutto e Funghi",
-        "price": 6.50
-      },
-      {
-        "pizza_id": 5,
-        "nome": "Diavola",
-        "price": 6.00
-      },
-      {
-        "pizza_id": 6,
-        "nome": "Capricciosa",
-        "price": 7.00
-      },
-      {
-        "pizza_id": 7,
-        "nome": "Quattro Formaggi",
-        "price": 8.00
-      },
-      {
-        "pizza_id": 8,
-        "nome": "Vegetariana",
-        "price": 6.50
-      },
-      {
-        "pizza_id": 9,
-        "nome": "Hawaiian",
-        "price": 7.00
-      },
-      {
-        "pizza_id": 10,
-        "nome": "Boscaiola",
-        "price": 7.50
-      }
-    ]
+  {
+    "id": 1,
+    "name": "Margherita",
+    "price": 5.00,
+    "cover": "https://example.com/images/margherita.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Basilico"]
+  },
+  {
+    "id": 2,
+    "name": "Marinara",
+    "price": 4.50,
+    "cover": "https://example.com/images/marinara.jpg",
+    "ingredients": ["Pomodoro", "Aglio", "Origano"]
+  },
+  {
+    "id": 3,
+    "name": "Quattro Stagioni",
+    "price": 7.50,
+    "cover": "https://example.com/images/quattro_stagioni.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Funghi", "Prosciutto", "Olive", "Carciofi"]
+  },
+  {
+    "id": 4,
+    "name": "Prosciutto e Funghi",
+    "price": 6.50,
+    "cover": "https://example.com/images/prosciutto_funghi.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Prosciutto", "Funghi"]
+  },
+  {
+    "id": 5,
+    "name": "Diavola",
+    "price": 6.00,
+    "cover": "https://example.com/images/diavola.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Salame Piccante"]
+  },
+  {
+    "id": 6,
+    "name": "Capricciosa",
+    "price": 7.00,
+    "cover": "https://example.com/images/capricciosa.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Prosciutto", "Funghi", "Carciofi", "Olive"]
+  },
+  {
+    "id": 7,
+    "name": "Quattro Formaggi",
+    "price": 8.00,
+    "cover": "https://example.com/images/quattro_formaggi.jpg",
+    "ingredients": ["Mozzarella", "Gorgonzola", "Parmesan", "Fontina"]
+  },
+  {
+    "id": 8,
+    "name": "Vegetariana",
+    "price": 6.50,
+    "cover": "https://example.com/images/vegetariana.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Verdure Grigliate"]
+  },
+  {
+    "id": 9,
+    "name": "Hawaiian",
+    "price": 7.00,
+    "cover": "https://example.com/images/hawaiian.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Prosciutto", "Ananas"]
+  },
+  {
+    "id": 10,
+    "name": "Boscaiola",
+    "price": 7.50,
+    "cover": "https://example.com/images/boscaiola.jpg",
+    "ingredients": ["Pomodoro", "Mozzarella", "Salsiccia", "Funghi"]
+  }
+]

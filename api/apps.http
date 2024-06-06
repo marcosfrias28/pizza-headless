@@ -1,12 +1,24 @@
 
-//Che mi dia tutte le pizze
-GET http://localhost:1234/api/pizza
+### Che mi dia tutte le pizze
+GET http://localhost:4322/api/pizza
 
-//Che mi dia la pizza con id 1
-GET http://localhost:1234/api/pizza/1
+### CREA UNA PIZZA NUOVA
+POST http://localhost:4322/api/pizza/
+Content-Type: application/json
 
-//Che mi dia tutte le pizze con il nome "Margherita"
-GET http://localhost:1234/api/pizza?name=Margherita
+{
+    "name": "Ortolana",
+    "price": 8,
+    "cover": "/ortolana.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Melanzane", "Peperoni", "Zucchine"]
+}
 
-//Che mi dia tutte le pizze con il prezzo minore di 5
-GET http://localhost:1234/api/pizza?price=5
+
+### Che mi dia la pizza con id 2
+GET http://localhost:4322/api/pizza/1
+
+### Che mi dia tutte le pizze con il nome "Margherita"
+GET http://localhost:4322/api/pizza?name=Margherita
+
+### Che mi dia tutte le pizze con l'ingrediente "Mozzarella"
+GET http://localhost:4322/api/pizza?ingredients=Melanzana
