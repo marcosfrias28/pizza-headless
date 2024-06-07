@@ -1,9 +1,9 @@
-
+ 
 ### Che mi dia tutte le pizze
-GET http://localhost:4322/api/pizza
+GET http://localhost:8080/api/pizza
 
 ### CREA UNA PIZZA NUOVA
-POST http://localhost:4322/api/pizza/
+POST http://localhost:8080/api/pizza/
 Content-Type: application/json
 
 {
@@ -15,10 +15,10 @@ Content-Type: application/json
 
 
 ### Che mi dia la pizza con id 2
-GET http://localhost:4322/api/pizza/1
+GET http://localhost:8080/api/pizza/07b1a8de-bc1c-4f8d-b0e3-1e8c66c03bfc
 
 ### Che mi dia tutte le pizze con il nome "Margherita"
-GET http://localhost:4322/api/pizza?name=Margherita
+GET http://localhost:8080/api/pizza?name=Margherita
 
 ### Che mi dia tutte le pizze con l'ingrediente "Mozzarella"
-GET http://localhost:4322/api/pizza?ingredients=Melanzana
+GET http://localhost:8080/api/pizza?ingredients=Melanzana

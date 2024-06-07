@@ -2,6 +2,54 @@
 import Vector from "../../public/Vector.astro";
 import Layout from "../layouts/Layout.astro";
 
+const ingredients = [
+	"Acciughe",
+	"Aglio",
+	"Ananas",
+	"Basilico",
+	"Brie",
+	"Bresaola",
+	"Capperi",
+	"Carciofi",
+	"Cipolla",
+	"Crema di Tartufo",
+	"Fontina",
+	"Frutti di Mare",
+	"Friarielli",
+	"Funghi",
+	"Funghi Porcini",
+	"Gorgonzola",
+	"Grana",
+	"Limone",
+	"Melanzane",
+	"Mozzarella",
+	"Mozzarella di Bufala",
+	"Noci",
+	"Olio d'oliva",
+	"Olive",
+	"Origano",
+	"Pancetta",
+	"Parmesan",
+	"Patate",
+	"Pepe",
+	"Peperoni",
+	"Pecorino",
+	"Pollo",
+	"Pomodoro",
+	"Prezzemolo",
+	"Prosciutto",
+	"Rucola",
+	"Rosmarino",
+	"Sale",
+	"Salame Piccante",
+	"Salsiccia",
+	"Speck",
+	"Tonno",
+	"Uovo",
+	"Verdure Grigliate",
+	"Zucchine",
+];
+
 export type Pizza = {
 	id: number;
 	name: string;
@@ -9,7 +57,7 @@ export type Pizza = {
 	cover: string;
 	ingredients: string[];
 };
-const res = await fetch("http://localhost:4322/api/pizza");
+const res = await fetch("https://pizza-api-htu2.onrender.com/api/pizza");
 const pizzas = await res.json();
 if (!res.ok) {
 	console.log("An error occurred while fetching the data.");
@@ -18,6 +66,19 @@ if (!res.ok) {
 
 <Layout title="Pizza Headless.">
 	<main class="w-full relative">
+		<label for="pizza-ingredient-list">Choose a flavor:</label>
+		<input
+			list="pizza-ingredients"
+			id="pizza-ingredient-list"
+			name="pizza-ingredient-list"
+		/>
+		<datalist id="pizza-ingredients">
+			{
+				ingredients.map((ingredient: string) => (
+					<option>{ingredient}</option>
+				))
+			}
+		</datalist>
 		<section
 			id="hero-section"
 			class="w-full md:w-max flex flex-row flex-wrap justify-between mx-auto mt-14"
@@ -42,7 +103,7 @@ if (!res.ok) {
 			</div>
 			<picture>
 				<img
-					src="/pizzaexample.webp"
+					src="/margherita.webp"
 					alt="Pizza Margherita with Basilic and Tomato Sauce"
 				/>
 			</picture>
@@ -65,10 +126,13 @@ if (!res.ok) {
 						pizzas.map((pizza: Pizza, i: number) => {
 							if (i > 3) return;
 							return (
-								<article class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden">
+								<article
+									id={pizza.id}
+									class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden"
+								>
 									<div class="h-1/2">
 										<img
-											src="/pizzaexample.webp"
+											src={pizza.cover}
 											alt=""
 											class="fixed -top-1/2"
 										/>
@@ -84,7 +148,7 @@ if (!res.ok) {
 												</span>
 											</>
 										</div>
-										<small class="text-gray-500">
+										<small class="text-gray-500 max-w-[100px ] overflow-hidden">
 											{pizza.ingredients.join(", ")}
 										</small>
 									</div>
