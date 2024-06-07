@@ -1,13 +1,14 @@
 import express, { json } from 'express';
-import pizza from '../api/pizza.json' assert { type: "json" } ;
+import pizza from '../api/pizza.json' with { type: "json" } ;
 import cors from 'cors';
-import { z } from 'astro/zod';
+import crypto from 'crypto';
 import { validatePizza } from './schema/pizzaSchema.js';
 
 const app = express();
-const PORT = process.env.PORT || 4322;
+const PORT = process.env.PORT || 8080;
 
 app.disable('x-powered-by'); // Disable the x-powered-by header
+
 
 // Middleware per il parsing dei JSON
 app.use(json())
@@ -36,7 +37,7 @@ if (!result.success) {
 
 }
 const newPizza = {
-    id: pizza.length + 1,
+    id: crypto.randomUUID(),
     ...result.data
 }
 pizza.push(newPizza);
@@ -45,10 +46,8 @@ pizza.push(newPizza);
 
 app.get('/api/pizza/:id', (req, res) => {
     const { id } = req.params;
-    const pizzaId = pizza.find(pizza => pizza.id === Number(id));
-    console.log(pizzaId);
+    const pizzaId = pizza.find(pizza => pizza.id === id);
     if (pizzaId) return res.json(pizzaId);
-
     res.status(404).json({message: 'Pizza not found'});
 })
 
