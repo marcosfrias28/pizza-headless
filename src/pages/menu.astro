@@ -18,15 +18,15 @@ if (!res.ok) {
 ---
 
 <Layout title="Pizza Headless.">
-    <main class="w-full relative">
+    <main class="w-full relative flex flex-col justify-center items-center">
         <SearchFormPizza client:load />
-
         <section
             id="pizza-order"
             class="relative mx-auto w-full flex justify-center items-center"
         >
             <div
-                class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-5 h-[557px] w-full"
+                transition:name="bg-image"
+                class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center top-36 h-[557px] w-full"
             >
             </div>
 
@@ -41,13 +41,13 @@ if (!res.ok) {
                                 <article
                                     transition:name={`card-${i}`}
                                     id={pizza.id}
-                                    class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7 mb-10"
+                                    class=" relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7 mb-10"
                                 >
-                                    <div class="h-1/2  flex-grow">
+                                    <div class="h-1/2 flex-grow w-full">
                                         <img
                                             src={pizza.cover}
                                             alt=""
-                                            class="fixed -top-1/2"
+                                            class="fixed -top-1/2 w-full object-cover object-center scale-125w"
                                         />
                                     </div>
                                     <div class="mx-8 flex-grow">
