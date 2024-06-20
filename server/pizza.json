@@ -1,0 +1,212 @@
+[
+  {
+    "id": "07b1a8de-bc1c-4f8d-b0e3-1e8c66c03bfc",
+    "name": "Margherita",
+    "price": 5.00,
+    "cover": "/margherita.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Basilico"]
+  },
+  {
+    "id": "38d3a6e4-895e-4f26-bb8b-c481d1c16b26",
+    "name": "Marinara",
+    "price": 4.50,
+    "cover": "/marinara.webp",
+    "ingredients": ["Pomodoro", "Aglio", "Origano"]
+  },
+  {
+    "id": "4ed0b5c9-788e-43b3-bf08-1db08cfe21b1",
+    "name": "Quattro Stagioni",
+    "price": 7.50,
+    "cover": "/4formaggi.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Funghi", "Prosciutto", "Olive", "Carciofi"]
+  },
+  {
+    "id": "60ed2c87-bd98-4015-9277-162c005fed31",
+    "name": "Prosciutto e Funghi",
+    "price": 6.50,
+    "cover": "/prosciuttoefunghi.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Prosciutto", "Funghi"]
+  },
+  {
+    "id": "8d209e95-e5d7-4f47-8e39-7c572b9a5b3e",
+    "name": "Diavola",
+    "price": 6.00,
+    "cover": "/diavola.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Salame Piccante"]
+  },
+  {
+    "id": "a329fb43-7d4d-4385-a0d1-83c5d83c55df",
+    "name": "Capricciosa",
+    "price": 7.00,
+    "cover": "/capricciosa.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Prosciutto", "Funghi", "Carciofi", "Olive"]
+  },
+  {
+    "id": "b497ac92-330d-4b6d-b8e1-d41abfb25e1b",
+    "name": "Quattro Formaggi",
+    "price": 8.00,
+    "cover": "/4formaggi.webp",
+    "ingredients": ["Mozzarella", "Gorgonzola", "Parmesan", "Fontina"]
+  },
+  {
+    "id": "cf99d71a-7c07-48f8-95bb-b909c3cb246f",
+    "name": "Vegetariana",
+    "price": 6.50,
+    "cover": "/vegetariana.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Verdure Grigliate"]
+  },
+  {
+    "id": "d18a6aef-7e25-42c7-9b68-5fd4893915d0",
+    "name": "Hawaiian",
+    "price": 7.00,
+    "cover": "/hawaiian.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Prosciutto", "Ananas"]
+  },
+  {
+    "id": "ec82ad2a-82a6-4eb8-9930-230a4e82675a",
+    "name": "Boscaiola",
+    "price": 7.50,
+    "cover": "/boscaiola.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Salsiccia", "Funghi"]
+  },
+  {
+    "id": "f401b4f5-6b18-4ab8-8a1f-70de5e71e748",
+    "name": "Napoli",
+    "price": 6.00,
+    "cover": "/napoli.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Acciughe", "Capperi"]
+  },
+  {
+    "id": "f54bd95e-b7a0-45e3-a202-8341518d20be",
+    "name": "Tonno e Cipolla",
+    "price": 6.50,
+    "cover": "/tonnoecipolla.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Tonno", "Cipolla"]
+  },
+  {
+    "id": "06e4eafa-30a0-4140-8d96-20d1c53cb3aa",
+    "name": "Frutti di Mare",
+    "price": 8.50,
+    "cover": "/fruttidimare.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Frutti di Mare", "Aglio", "Prezzemolo"]
+  },
+  {
+    "id": "184f99df-98c1-4c32-8752-1fb06ae6e92a",
+    "name": "Pugliese",
+    "price": 6.00,
+    "cover": "/pugliese.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Cipolla", "Olive"]
+  },
+  {
+    "id": "29b3b5f8-b647-45c2-9ba6-2e9572681d91",
+    "name": "Salsiccia e Friarielli",
+    "price": 7.00,
+    "cover": "/salsicciaefriarielli.webp",
+    "ingredients": ["Mozzarella", "Salsiccia", "Friarielli"]
+  },
+  {
+    "id": "3a417842-8e6e-4f07-bf1d-9aef2eb8f740",
+    "name": "Bufalina",
+    "price": 7.50,
+    "cover": "/bufalina.webp",
+    "ingredients": ["Pomodoro", "Mozzarella di Bufala", "Basilico"]
+  },
+  {
+    "id": "4713b199-334e-4bc7-83fc-2f115e8f40f7",
+    "name": "Rustica",
+    "price": 6.50,
+    "cover": "/rustica.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Salsiccia", "Patate"]
+  },
+  {
+    "id": "57e6ff34-c226-4a6a-b0b1-b61795b9ff9a",
+    "name": "Contadina",
+    "price": 6.50,
+    "cover": "/contadina.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Melanzane", "Zucchine", "Peperoni"]
+  },
+  {
+    "id": "68a6d2b5-0f32-4a75-9b79-46bfc70c7093",
+    "name": "Speck e Brie",
+    "price": 7.50,
+    "cover": "/speckebrie.webp",
+    "ingredients": ["Mozzarella", "Speck", "Brie"]
+  },
+  {
+    "id": "773bcd56-7602-45ae-9371-d1b9e8edbf9b",
+    "name": "Zingara",
+    "price": 7.00,
+    "cover": "/zingara.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Funghi", "Salame", "Peperoni"]
+  },
+  {
+    "id": "84c2b647-4ee6-429d-9d68-1cc429462b60",
+    "name": "Carbonara",
+    "price": 8.00,
+    "cover": "/carbonara.webp",
+    "ingredients": ["Mozzarella", "Pancetta", "Uovo", "Pecorino", "Pepe"]
+  },
+  {
+    "id": "97d0733e-3f12-4314-8414-13a9d1bc260f",
+    "name": "Tartufo",
+    "price": 9.00,
+    "cover": "/tartufo.webp",
+    "ingredients": ["Mozzarella", "Crema di Tartufo", "Funghi", "Prosciutto"]
+  },
+  {
+    "id": "a802fc55-6a80-4e75-a7ef-9c0157e9147e",
+    "name": "Focaccia",
+    "price": 5.00,
+    "cover": "/focaccia.webp",
+    "ingredients": ["Olio d'oliva", "Rosmarino", "Sale"]
+  },
+  {
+    "id": "b98a7307-748e-4b41-89d5-7d93f2a10ae3",
+    "name": "Patate e Rosmarino",
+    "price": 6.00,
+    "cover": "/patateerosmarino.webp",
+    "ingredients": ["Mozzarella", "Patate", "Rosmarino", "Olio d'oliva"]
+  },
+  {
+    "id": "c60e57a9-4f61-45d0-aef4-8a1aebf3ffaf",
+    "name": "Funghi e Tartufo",
+    "price": 8.50,
+    "cover": "/funghietartufo.webp",
+    "ingredients": ["Mozzarella", "Funghi", "Crema di Tartufo"]
+  },
+  {
+    "id": "d79afc80-ff0d-4a85-9b6d-4b9a47b964d1",
+    "name": "Porcini",
+    "price": 9.00,
+    "cover": "/porcini.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Funghi Porcini", "Prezzemolo"]
+  },
+  {
+    "id": "e8f3e820-37ae-41c8-98cf-ded08f3b31d0",
+    "name": "Parmigiana",
+    "price": 7.50,
+    "cover": "/parmigiana.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Melanzane", "Parmesan", "Basilico"]
+  },
+  {
+    "id": "f9583f6e-b7c8-407b-96af-0083566d7ab3",
+    "name": "Bresaola",
+    "price": 8.00,
+    "cover": "/bresaola.webp",
+    "ingredients": ["Mozzarella", "Bresaola", "Rucola", "Grana", "Limone"]
+  },
+  {
+    "id": "fab84a8d-7d56-46ed-9db0-0ebf0e327a76",
+    "name": "Gorgonzola e Noci",
+    "price": 8.00,
+    "cover": "/gorgonzolaenoci.webp",
+    "ingredients": ["Mozzarella", "Gorgonzola", "Noci"]
+  },
+  {
+    "id": "fbdedb84-7d72-42ef-98de-6b89a22712be",
+    "name": "Pollo e Peperoni",
+    "price": 7.50,
+    "cover": "/polloepeperoni.webp",
+    "ingredients": ["Pomodoro", "Mozzarella", "Pollo", "Peperoni"]
+  }
+]

@@ -1,0 +1,14 @@
+{
+	"type": "module",
+	"scripts": {
+		"start:local": "node --watch server-with-local.js",
+		"start:mysql": "node --watch server-with-mysql.js"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cors": "2.8.5",
+		"express": "4.19.2",
+		"mysql2": "^3.10.0",
+		"zod": "3.23.8"
+	}
+}
