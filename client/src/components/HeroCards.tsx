@@ -20,7 +20,7 @@ function Cards() {
   } = useQuery({
     queryKey: ["pizzas"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8080/pizza`);
+      const res = await axios.get(`https://pizza-api.up.railway.app/pizza`);
       const data = await res.data;
       return data;
     },
