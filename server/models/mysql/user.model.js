@@ -1,8 +1,6 @@
-import { createConnection } from "mysql2/promise";
 import bcrypt from 'bcrypt';
-import { MYSQL_CONFIG } from "../../config/sql.config.js";
+import connection from '../../config/sql.config.js';
 
-const connection = await createConnection(MYSQL_CONFIG);
 
 export class UserModel {
     static async register(user) {
@@ -14,7 +12,7 @@ export class UserModel {
             await connection.query('INSERT INTO Users (id, name, email, password) VALUES (UUID_TO_BIN(?), ?, ?, ?);', [id, name, email, password]);
             return {id, message: 'User created successfully'};
         } catch {
-            return {message: 'Error creating user'};
+            return {message: 'Internal Error creating user'};
         }
 
     }
@@ -29,7 +27,7 @@ export class UserModel {
             }
             return {message: 'Invalid credentials'};
         } catch {
-            return {message: 'Error logging in user'};
+            return {message: 'Internal Error logging in user'};
         }
     }
     static async delete({id}) {

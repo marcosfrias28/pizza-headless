@@ -1,8 +1,4 @@
-import mysql from 'mysql2/promise';
-import { MYSQL_CONFIG } from '../../config/sql.config.js';
-
-const connection = await mysql.createConnection(MYSQL_CONFIG)
-
+import connection from '../../config/sql.config.js';
 
 export class PizzaModel {
     static async getAllPizzas({name, ingredients}) {
