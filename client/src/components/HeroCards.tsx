@@ -37,6 +37,7 @@ function Cards() {
       {error && <div className="text-red-500 text-2xl">Error</div>}
       {!isPending && pizzas &&
         pizzas.map((pizza: Pizza, i: number) => {
+          if (i > 3) return;
           return (
             <article
               key={pizza.id}

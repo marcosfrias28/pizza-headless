@@ -19,7 +19,7 @@ import {HeroCards } from "../components/HeroCards.tsx";
             >
             </div>
 
-            <HeroCards client:load />
+            <HeroCards transition:name="hero-cards" client:load />
         </section>
     </main>
 </Layout>

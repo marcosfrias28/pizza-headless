@@ -43,7 +43,7 @@ import {HeroCards } from "../components/HeroCards.tsx";
 				class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-5 h-[557px] w-full"
 			>
 			</div>
-			<HeroCards client:load />
+			<HeroCards transition:name="hero-cards" client:load />
 		</section>
 		<section
 			class="w-full max-w-max flex xl:flex-row flex-col flex-nowrap gap-5 mx-auto mt-32"
