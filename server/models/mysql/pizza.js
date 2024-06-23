@@ -1,14 +1,7 @@
 import mysql from 'mysql2/promise';
+import { MYSQL_CONFIG } from '../../config/sql.config.js';
 
-const config = {
-    host: 'localhost',
-    user: 'root',
-    port: 3306,
-    password: '',
-    database: 'Pizzeria'
-};
-
-const connection = await mysql.createConnection(config)
+const connection = await mysql.createConnection(MYSQL_CONFIG)
 
 
 export class PizzaModel {
@@ -16,7 +9,6 @@ export class PizzaModel {
         const [pizza] = await connection.query('SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza;');
         if (name) {
             const pizzaName = pizza.filter(p => p.name.toLowerCase().includes(name.toLowerCase()))
-            console.log(pizzaName);
             return pizzaName;
             // const [pizzaByName] = await connection.query('SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza WHERE name = ?', [name]);
             // return pizzaByName;

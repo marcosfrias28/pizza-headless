@@ -1,52 +1,41 @@
 import { createConnection } from "mysql2/promise";
+import bcrypt from 'bcrypt';
+import { MYSQL_CONFIG } from "../../config/sql.config.js";
 
-const config = {
-    host: 'localhost',
-    user: 'root',
-    port: 3306,
-    password: '',
-    database: 'Pizzeria'
-}
-
-const connection = await createConnection(config);
+const connection = await createConnection(MYSQL_CONFIG);
 
 export class UserModel {
-    static async getUser({email, password}) {
-        try {
-            const [user] = await connection.query('SELECT BIN_TO_UUID(id) id, name, email FROM Users WHERE email = ? AND password = ?', [email, password]);
-            console.log(user);
-            if (user.length === 0) return {message: 'Username or password incorrect'}
-            return user[0];
-        } catch (error) {
-            return {message: 'Error getting user'};
-        }
-    }
-    static async getById({id}) {
-        try {
-            const [userById] = await connection.query('SELECT BIN_TO_UUID(id) id, name, email FROM Users WHERE ID = UUID_TO_BIN(?);', [id]);
-            if (userById.length === 0) return null;
-            return userById[0];
-        } catch (error) {
-            return {message: 'Error getting user by id'};
-        }
-    }
-    static async create({input}) {
-        const {name, email, password} = input.data;
+    static async register(user) {
+        const {name, email, password} = user;
         const id = crypto.randomUUID();
         try {
             const [result] = await connection.query('SELECT email FROM Users WHERE email = ?;', [email]);
             if (result.length > 0) return {message: 'User already exists'};
             await connection.query('INSERT INTO Users (id, name, email, password) VALUES (UUID_TO_BIN(?), ?, ?, ?);', [id, name, email, password]);
-            return {message: 'User created successfully'};
-        } catch (error) {
+            return {id, message: 'User created successfully'};
+        } catch {
             return {message: 'Error creating user'};
         }
 
     }
+    static async login({email, password}) {
+        try {
+            const [result] = await connection.query('SELECT password FROM Users WHERE email = ?;', [email]);
+            const isValid = bcrypt.compareSync(password, result[0].password);
+            if (isValid){
+                const [user] = await connection.query('SELECT BIN_TO_UUID(id) as id, name, email FROM Users WHERE email = ?;', [email]);
+                console.log(user[0].email + ' logged in');
+                return {message: 'User logged in', user: {id: user[0].id, name: user[0].name, email: user[0].email}};
+            }
+            return {message: 'Invalid credentials'};
+        } catch {
+            return {message: 'Error logging in user'};
+        }
+    }
     static async delete({id}) {
         try {
             await connection.query('DELETE FROM Users WHERE id = UUID_TO_BIN(?)', [id])
-        } catch (error) {
+        } catch {
             return {message: 'Error deleting user'};
         }
     }

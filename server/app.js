@@ -3,13 +3,14 @@ import cors from 'cors';
 import { createPizzaRouter } from './routes/pizza.js';
 import { createUserRouter } from './routes/user.route.js';
 
-export const createApp = ({ pizzaModel, userModel }) => { 
+export const createApp = ({ pizzaModel, userModel }) => {
+    
     const app = express();
     const PORT = process.env.PORT || 8080;
 
     app.disable('x-powered-by'); //Disable the x-powered-by header
 
-    // Middleware per il parsing dei JSON
+    // Middleware per il parsing dei JSON and CORS
     app.use(json())
     app.use(cors())
 
