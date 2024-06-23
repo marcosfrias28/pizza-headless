@@ -8,7 +8,7 @@ function SearchFormPizza() {
     const [nameList, setNameList] = useState(undefined as any)
 
     useEffect(() => {
-        fetch('http://localhost:8080/pizza/names/')
+        fetch('https://pizza-api.up.railway.app/pizza/names')
             .then(res => res.json())
             .then(data => {
                 setNameList(data.map((n: any) => n.name));
