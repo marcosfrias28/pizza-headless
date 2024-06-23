@@ -2,7 +2,8 @@ import connection from '../../config/sql.config.js';
 
 export class PizzaModel {
     static async getAllPizzas({name, ingredients}) {
-        const [pizza] = await connection.query('SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza;');
+        try {
+            const [pizza] = await connection.query('SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza;');
         if (name) {
             const pizzaName = pizza.filter(p => p.name.toLowerCase().includes(name.toLowerCase()))
             return pizzaName;
@@ -10,6 +11,10 @@ export class PizzaModel {
             // return pizzaByName;
         }
         return pizza;
+        } catch {
+            return {message: 'Pizzas not found'};
+        }
+        
      }
      static async getAllNames() {
         const [allNames] = await connection.query('SELECT name FROM Pizza');
