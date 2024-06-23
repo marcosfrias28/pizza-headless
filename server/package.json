@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"scripts": {
-		"start": "node --watch server-with-mysql.js"
+		"start": "node index.js"
 	},
 	"dependencies": {
 		"@types/bcrypt": "^5.0.2",
