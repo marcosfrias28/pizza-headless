@@ -5,7 +5,6 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="Register - Pizza Headless.">
     <section class="relative">
         <div
-            transition:name="bg-image"
             class="absolute bg-[url(/herobg.svg)] -z-20 bg-auto bg-no-repeat bg-center top-36 h-[557px] w-full"
         >
         </div>
@@ -26,7 +25,7 @@ import Layout from "../layouts/Layout.astro";
                     <h1
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
                     >
-                        Create an account
+                        Login
                     </h1>
                     <form class="space-y-4 md:space-y-6" action="#">
                         <div>
@@ -41,7 +40,7 @@ import Layout from "../layouts/Layout.astro";
                                 id="email"
                                 class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="name@email.com"
-                                required=""
+                                required
                             />
                         </div>
                         <div>
@@ -56,22 +55,7 @@ import Layout from "../layouts/Layout.astro";
                                 id="password"
                                 placeholder="••••••••"
                                 class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                required=""
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="confirm-password"
-                                class="block mb-2 text-sm font-medium text-gray-900"
-                                >Confirm password</label
-                            >
-                            <input
-                                type="password"
-                                name="confirm-password"
-                                id="confirm-password"
-                                placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                required=""
+                                required
                             />
                         </div>
                         <div class="flex items-start">
@@ -81,7 +65,7 @@ import Layout from "../layouts/Layout.astro";
                                     aria-describedby="terms"
                                     type="checkbox"
                                     class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                                    required=""
+                                    required
                                 />
                             </div>
                             <div class="ml-3 text-sm">
@@ -98,15 +82,15 @@ import Layout from "../layouts/Layout.astro";
                         <button
                             type="submit"
                             class="w-full bg-[#F6CE40] py-3 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
-                            >Create an account</button
+                            >Login</button
                         >
                         <p
                             class="text-sm font-light text-gray-500 dark:text-gray-400"
                         >
-                            Already have an account? <a
-                                href="/login"
-                                  class="p-2 text-gray-700 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
-                                >Login here</a
+                             Don't have an account yet? <a
+                                href="/register"
+                                class="p-2 text-gray-700 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
+                                >Register here</a
                             >
                         </p>
                     </form>

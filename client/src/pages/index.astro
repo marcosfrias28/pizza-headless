@@ -1,22 +1,6 @@
 ---
-import { fade } from "astro:transitions";
-import Vector from "../../public/Vector.astro";
 import Layout from "../layouts/Layout.astro";
-
-export type Pizza = {
-	id: string;
-	name: string;
-	price: number;
-	cover: string;
-	ingredients: string[];
-};
-const res = await fetch("http://localhost:8080/pizza");
-const pizzas = await res.json();
-console.log(pizzas);
-
-if (!res.ok) {
-	console.log("An error occurred while fetching the data.");
-}
+import {HeroCards } from "../components/HeroCards.tsx";
 ---
 
 <Layout title="Pizza Headless.">
@@ -59,58 +43,7 @@ if (!res.ok) {
 				class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-5 h-[557px] w-full"
 			>
 			</div>
-
-			<section
-				id="cards"
-				class="w-full gap-6 mx-auto mt-14 flex flex-col md:flex-row flex-wrap justify-center items-center"
-			>
-				{
-					pizzas &&
-						pizzas.map((pizza: Pizza, i: number) => {
-							if (i > 3) return;
-							return (
-								<article
-									transition:name={`card-${i}`}
-									transition:animate={fade({
-										duration: 0.5 + i,
-									})}
-									id={pizza.id}
-									class="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7"
-								>
-									<div class="h-1/2  flex-grow">
-										<img
-											src={pizza.cover}
-											alt=""
-											class="fixed -top-1/2"
-										/>
-									</div>
-									<div class="mx-8 flex-grow">
-										<div class="flex flex-row justify-between gap-10">
-											<>
-												<span class="text-black font-semibold">
-													{pizza.name}
-												</span>
-												<span class="text-red-500 font-semibold">
-													{pizza.price} €
-												</span>
-											</>
-										</div>
-										<div class="text-gray-500 w-full max-w-[300px] text-pretty text-ellipsis overflow-hidden text-xs">
-											{pizza.id}
-										</div>
-									</div>
-
-									<button class="flex flex-row flex-nowrap justify-center items-center gap-2 rounded-lg px-7 py-3 mx-14 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
-										<>
-											<span>Add to order</span>
-											<Vector />
-										</>
-									</button>
-								</article>
-							);
-						})
-				}
-			</section>
+			<HeroCards client:load />
 		</section>
 		<section
 			class="w-full max-w-max flex xl:flex-row flex-col flex-nowrap gap-5 mx-auto mt-32"
