@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { ENDPOINT } from "../utlis/ENDPOINT.js";
 ---
 
 <Layout title="Register - Pizza Headless.">
     <section class="relative">
         <div
-            transition:name="bg-image"
             class="absolute bg-[url(/herobg.svg)] -z-20 bg-auto bg-no-repeat bg-center top-36 h-[557px] w-full"
         >
         </div>
@@ -28,7 +28,22 @@ import Layout from "../layouts/Layout.astro";
                     >
                         Create an account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    <form class="space-y-4 md:space-y-6" method="post" action={`https://localhost:8080/user/register`}>
+                        <div>
+                            <label
+                                for="name"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Name</label
+                            >
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="John Doe"
+                                required=""
+                            />
+                        </div>
                         <div>
                             <label
                                 for="email"

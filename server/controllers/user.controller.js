@@ -1,15 +1,26 @@
-import { genSalt } from "bcrypt";
 import { validateUser } from "../schema/userSchema.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export class UserController {
     constructor({userModel}) {
         this.userModel = userModel;
     }
     login = async (req, res) => {
-        const {email, password} = req.body;
+      const {email, password} = req.body;
         const user = await this.userModel.login({email, password});
-        res.json(user);
+        if (user.error) {
+          return res.status(400).json({error: user.error});
+        }
+        const token = jwt.sign({ id: user.id, email: user.email}, process.env.TOKEN_SECRET, {
+          expiresIn: '1h'
+        });
+        return res.cookie('access-token', token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+          maxAge: 1000 * 60 * 60
+        }).status(200).json({user});
     }
      register = async (req, res) => {
         const {name, email, password} = req.body;
@@ -24,7 +35,6 @@ export class UserController {
           } catch {
             res.status(500).json({message: 'Error creating user'});
           }
-        
       } else {
           return res.status(400).json({message: 'Invalid User', error: result.error});
         }

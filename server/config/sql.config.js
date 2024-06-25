@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { createConnection } from 'mysql2/promise';
 dotenv.config();
 
 const MYSQL_CONFIG = {
@@ -9,6 +8,5 @@ const MYSQL_CONFIG = {
     database: process.env.MYSQLDATABASE,
     port: process.env.MYSQLPORT
 }
-const connection = await createConnection(MYSQL_CONFIG);
 
-export default connection;
+export default MYSQL_CONFIG;

@@ -1,4 +1,7 @@
-import connection from '../../config/sql.config.js';
+import { createConnection } from 'mysql2/promise';
+import MYSQL_CONFIG from '../../config/sql.config.js';
+
+const connection = await createConnection(MYSQL_CONFIG);
 
 export class PizzaModel {
     static async getAllPizzas({name, ingredients}) {
@@ -14,7 +17,6 @@ export class PizzaModel {
         } catch {
             return {message: 'Pizzas not found'};
         }
-        
      }
      static async getAllNames() {
         const [allNames] = await connection.query('SELECT name FROM Pizza');

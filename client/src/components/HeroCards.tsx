@@ -1,6 +1,7 @@
 import type { Pizza } from "../types/PizzaType.js";
 import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import axios from "axios";
+import { ENDPOINT } from "../utlis/ENDPOINT.js";
 
 
 const queryClient = new QueryClient();
@@ -20,7 +21,7 @@ function Cards() {
   } = useQuery({
     queryKey: ["pizzas"],
     queryFn: async () => {
-      const res = await axios.get(`https://pizza-api.up.railway.app/pizza`);
+      const res = await axios.get(`${ENDPOINT}/pizza`);
       const data = await res.data;
       return data;
     },

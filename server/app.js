@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 import { createPizzaRouter } from './routes/pizza.js';
 import { createUserRouter } from './routes/user.route.js';
+import cookieParser from 'cookie-parser';
 
 export const createApp = ({ pizzaModel, userModel }) => {
     
@@ -13,6 +14,7 @@ export const createApp = ({ pizzaModel, userModel }) => {
     // Middleware per il parsing dei JSON and CORS
     app.use(json())
     app.use(cors())
+    app.use(cookieParser());
 
     app.use('/pizza', createPizzaRouter({ pizzaModel }));
     app.use('/user', createUserRouter({ userModel }));
