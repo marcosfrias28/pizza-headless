@@ -1,8 +1,10 @@
 import type { Pizza } from "../types/PizzaType.js";
-import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import axios from "axios";
-import { ENDPOINT } from "../utlis/ENDPOINT.js";
-
 
 const queryClient = new QueryClient();
 
@@ -13,6 +15,26 @@ export function HeroCards() {
     </QueryClientProvider>
   );
 }
+
+function LoadingArticle() {
+  return (
+    <article className="relative flex flex-col animate-pulse w-[315px] h-[332px] bg-white rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7">
+      <div className="h-1/2  flex-grow bg-slate-200"></div>
+      <div className="mx-8 flex-grow">
+        <div className="flex flex-row justify-between gap-10">
+          <span className="font-semibold bg-slate-200"></span>
+          <span className="font-semibold bg-slate-200"></span>
+        </div>
+        <div className="text-gray-500 w-full max-w-[300px] text-pretty text-ellipsis overflow-hidden text-xs"></div>
+      </div>
+
+      <button className="flex flex-row flex-nowrap justify-center items-center gap-2 rounded-lg px-7 py-3 mx-14 bg-slate-300 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+        <span></span>
+      </button>
+    </article>
+  );
+}
+
 function Cards() {
   const {
     data: pizzas,
@@ -21,7 +43,7 @@ function Cards() {
   } = useQuery({
     queryKey: ["pizzas"],
     queryFn: async () => {
-      const res = await axios.get(`${ENDPOINT}/pizza`);
+      const res = await axios.get(`/api/pizza?page=0&perPage=4`);
       const data = await res.data;
       return data;
     },
@@ -32,19 +54,17 @@ function Cards() {
       id="cards"
       className="w-full min-h-72 gap-6 mx-auto mt-14 flex flex-col md:flex-row flex-wrap justify-center items-center"
     >
-      {isPending && (
-        <div className=" border-t-8 border-b-8 rounded-full animate-spin border-yellow-600 h-72 w-72 "></div>
-      )}
-      {error && <div className="text-red-500 text-2xl">Error</div>}
-      {!isPending && pizzas &&
-        pizzas.map((pizza: Pizza, i: number) => {
+      {isPending &&
+        [...Array(4)].map((_, i) => <LoadingArticle key={i}></LoadingArticle>)}
+      {!isPending &&
+        pizzas &&
+        pizzas?.data?.map((pizza: Pizza, i: number) => {
           if (i > 3) return;
           return (
             <article
               key={pizza.id}
-              style={{ viewTransitionName: `ariticle-${i}` }}
               id={pizza.id}
-              className="relative flex flex-col w-[315px] h-[332px] bg-white/70 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7"
+              className="relative flex flex-col w-[315px] h-[332px] bg-white/90 rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7"
             >
               <div className="h-1/2  flex-grow">
                 <img src={pizza.cover} alt="" className="fixed -top-1/2" />

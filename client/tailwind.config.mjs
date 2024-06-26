@@ -3,6 +3,9 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
+			animation: {
+				'spin-slow': 'spin 30s linear infinite',
+			  },
 			fontFamily: {
 				'pattaya': ['Pattaya', 'sans-serif'],
 				'montserrat': ['Montserrat', 'sans-serif']
