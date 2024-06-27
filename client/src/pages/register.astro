@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ENDPOINT } from "../utlis/ENDPOINT.js";
 ---
 
 <Layout title="Register - Pizza Headless.">
@@ -10,6 +9,8 @@ import { ENDPOINT } from "../utlis/ENDPOINT.js";
         >
         </div>
         <div
+        transition:name="user-form"
+
             class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
         >
             <a

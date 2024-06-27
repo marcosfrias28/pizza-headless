@@ -8,11 +8,11 @@ function SearchFormPizza() {
     const [nameList, setNameList] = useState(undefined as any)
 
     useEffect(() => {
-        fetch('https://pizza-api.up.railway.app/pizza/names')
-            .then(res => res.json())
-            .then(data => {
-                setNameList(data.map((n: any) => n.name));
-            })
+        // fetch('https://pizza-api.up.railway.app/pizza/names')
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setNameList(data.map((n: any) => n.name));
+        //     })
     }, [])
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -33,14 +33,14 @@ function SearchFormPizza() {
             <datalist id="pizza-ingredients">
                 {
                     ingredients.map((ingredient: string) => (
-                        <option>{ingredient}</option>
+                        <option key={ingredient}>{ingredient}</option>
                     ))
                 }
             </datalist>
             <datalist id="pizza-names">
                 {
-                    nameList && nameList.map((ingredient: string) => (
-                        <option>{ingredient}</option>
+                    nameList && nameList.map((pizzaName: string) => (
+                        <option key={pizzaName}>{pizzaName}</option>
                     ))
                 }
             </datalist>
@@ -50,7 +50,6 @@ function SearchFormPizza() {
                 className="p-2 rounded-xl bg-[#dddace] text-neutral-400"
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilter(e.currentTarget.value as SetStateAction<any>)}
             >
-                <option selected>Filter by:</option>
                 <option value="Name">Name</option>
                 <option value="Ingredients">Ingredients</option>
             </select>

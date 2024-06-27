@@ -1,6 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import {HeroCards } from "../components/HeroCards.tsx";
+import {MenuItems } from "../components/MenuItems.tsx";
+
+const section = Astro.cookies.get("access-token");
+console.log(section);
+
 ---
 
 <Layout title="Pizza Headless.">
@@ -9,7 +13,7 @@ import {HeroCards } from "../components/HeroCards.tsx";
 			id="hero-section"
 			class="w-full md:w-max flex flex-row flex-wrap justify-between mx-auto mt-14"
 		>
-			<div class="max-w-2xl">
+			<div transition:name="hero-text" class="max-w-2xl">
 				<small class="text-2xl font-pattaya text-bright-sun-300"
 					>Based in Italy</small
 				>
@@ -22,13 +26,15 @@ import {HeroCards } from "../components/HeroCards.tsx";
 					Morbi eu cursus nisi. Nunc consectetur ipsum pharetra,
 					congue odio quis, porttitor ligula. Vestibulum viverra.
 				</p>
-				<button
-					class="rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-					>Check the menu</button
+				<a
+					href="/menu"
+					class="rounded-lg block w-fit px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+					>Check the menu</a
 				>
 			</div>
 			<picture class="max-w-lg self-start">
 				<img
+					transition:name="margherita"
 					src="/margherita.webp"
 					alt="Pizza Margherita with Basilic and Tomato Sauce"
 				/>
@@ -43,7 +49,9 @@ import {HeroCards } from "../components/HeroCards.tsx";
 				class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-5 h-[557px] w-full"
 			>
 			</div>
-			<HeroCards transition:name="hero-cards" client:load />
+			<div transition:name="hero-cards" class=" min-h-96">
+				<MenuItems perPage={4} client:load />
+			</div>
 		</section>
 		<section
 			class="w-full max-w-max flex xl:flex-row flex-col flex-nowrap gap-5 mx-auto mt-32"
@@ -281,7 +289,7 @@ import {HeroCards } from "../components/HeroCards.tsx";
 		</svg>
 		<div class="w-full h-[394px] bg-[#be9400] relative overflow-hidden">
 			<img
-				class="absolute -bottom-1/2 -right-52"
+				class="absolute -right-96 top-10"
 				src="/margherita.webp"
 				alt="Pizza Margherita with Basilic and Tomato Sauce"
 			/>

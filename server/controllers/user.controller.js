@@ -24,6 +24,7 @@ export class UserController {
     }
      register = async (req, res) => {
         const {name, email, password} = req.body;
+
         const result = await validateUser({name, email, password});
         if (result.success) {
           try {

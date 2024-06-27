@@ -1,25 +1,55 @@
 ---
-import Vector from "../../public/Vector.astro";
 import Layout from "../layouts/Layout.astro";
 import SearchFormPizza from "../components/SearchPizza/SearchPizza.tsx";
-import {HeroCards } from "../components/HeroCards.tsx";
-
+import MenuItems from "../components/MenuItems.tsx";
 ---
 
 <Layout title="Pizza Headless.">
-    <main class="w-full relative flex flex-col justify-center items-center">
-        <SearchFormPizza client:load />
-        <section
-            id="pizza-order"
-            class="relative mx-auto w-full flex justify-center items-center"
-        >
-            <div
-                transition:name="bg-image"
-                class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center top-36 h-[557px] w-full"
-            >
-            </div>
+  <picture
+    class="absolute -left-40 max-w-lg self-start animate-spin-slow duration-300">
+    <img
+      transition:name="margherita"
+      src="/margherita.webp"
+      alt="Pizza Margherita with Basilic and Tomato Sauce"
+    />
+  </picture>
+  <main class="w-full relative flex flex-col justify-center items-center">
+    <SearchFormPizza client:load />
+    <div
+      transition:name="hero-text"
+      aria-hidden="true"
+      class="max-w-2xl invisible translate-x-[2000px] absolute not-sr-only"
+    >
+      <small class="text-2xl font-pattaya text-bright-sun-300"
+        >Based in Italy</small
+      >
+      <h1 class="flex flex-col text-[65px] font-bold">
+        <span>Artisan Pizzas,</span>
+        <span>Crafted with Care</span>
+      </h1>
+      <p class="text-[16px]">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu cursus
+        nisi. Nunc consectetur ipsum pharetra, congue odio quis, porttitor
+        ligula. Vestibulum viverra.
+      </p>
+      <button
+        class="rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+        >Check the menu</button
+      >
+    </div>
 
-            <HeroCards transition:name="hero-cards" client:load />
-        </section>
-    </main>
+    <section
+      id="pizza-order"
+      class="relative mx-auto w-full flex justify-center items-center"
+    >
+      <div
+        transition:name="bg-image"
+        class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center top-36 h-[557px] w-full"
+      >
+      </div>
+      <div transition:name="hero-cards" class="min-h-96">
+        <MenuItems client:load />
+      </div>
+    </section>
+  </main>
 </Layout>

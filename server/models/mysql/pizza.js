@@ -15,7 +15,7 @@ export class PizzaModel {
         }
         return pizza;
         } catch {
-            return {message: 'Pizzas not found'};
+            return {error: 'Pizzas not found'};
         }
      }
      static async getAllNames() {
@@ -23,9 +23,13 @@ export class PizzaModel {
         return allNames;
      }
     static async getById({id}) {
-        const [pizzaById] = await connection.query('SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza WHERE ID = UUID_TO_BIN(?)', [id]);
-        if (pizzaById.length === 0) return null;
+        try {
+            const [pizzaById] = await connection.query('SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza WHERE ID = UUID_TO_BIN(?)', [id]);
+        if (pizzaById.length === 0) return {error: 'Pizza not found'};
         return pizzaById[0];
+        } catch {
+            return {error: 'Pizza not found'};
+        }
      }
     static async create({input}) {
         const {name, price, cover} = input.data;
