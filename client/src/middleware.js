@@ -1,4 +1,6 @@
+import cookieParser from 'cookie-parser';
+
 export function onRequest (context, next ) {
-    console.log("onRequest");
+    cookieParser(context.req, context.res);
     next();
 }

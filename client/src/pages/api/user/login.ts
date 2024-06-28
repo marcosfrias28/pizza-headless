@@ -1,5 +1,5 @@
 import { type APIContext, type APIRoute } from "astro";
-import { UserModel } from "../models/mysql/user.model";
+import { UserModel } from "../models/astrodb/user.model";
 import { res } from "../utils/Response";
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
@@ -8,8 +8,8 @@ dotenv.config();
 
 export const POST : APIRoute = async ({request, cookies} : APIContext) => {
     const formData = await request.formData();
-    const email = formData.get('email');
-    const password = formData.get('password');
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
     console.log(email, password);
     const user = await UserModel.login({email, password});
     if (user.error) {

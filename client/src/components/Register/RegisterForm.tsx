@@ -53,7 +53,7 @@ function RegisterForm() {
             setMessage(data);
             return;
         }
-        setMessage({message: 'User created successfully'});
+        setMessage(data.message);
     }
   return (
     <form
