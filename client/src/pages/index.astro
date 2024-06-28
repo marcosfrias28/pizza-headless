@@ -1,9 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import {MenuItems } from "../components/MenuItems.tsx";
+import {HomeMenu} from "../components/HomeMenu.tsx";
 
-const section = Astro.cookies.get("access-token");
-console.log(section);
 
 ---
 
@@ -50,7 +48,7 @@ console.log(section);
 			>
 			</div>
 			<div transition:name="hero-cards" class=" min-h-96">
-				<MenuItems perPage={4} client:load />
+				<HomeMenu client:load />
 			</div>
 		</section>
 		<section

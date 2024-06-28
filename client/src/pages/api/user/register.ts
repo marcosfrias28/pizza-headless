@@ -4,12 +4,13 @@ import bcrypt from "bcrypt";
 import { UserModel } from "../models/mysql/user.model";
 import { res } from "../utils/Response";
 
-export const POST : APIRoute = async ({ request }: APIContext) => {
-  const { name, email, password } = await request.json();
-    console.log(name, email, password);
+export const POST: APIRoute = async ({ request }: APIContext) => {
+  const formData = await request.formData();
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
   const result = await validateUser({ name, email, password });
-  console.log(result.error);
-  
   if (result.success === true) {
     try {
       const salt = await bcrypt.genSalt(10);
@@ -18,9 +19,17 @@ export const POST : APIRoute = async ({ request }: APIContext) => {
       const message = await UserModel.register(user);
       return res(message, 200, "OK");
     } catch {
-      res({ message: "Error creating user" }, 500, "Internal Server Error");
+      return res(
+        { message: "Error creating user" },
+        500,
+        "Internal Server Error"
+      );
     }
   } else {
-    res({ message: "Invalid User", error: result.error }, 400, "Bad Request");
+    return res(
+      { message: "Invalid User", error: result.error },
+      400,
+      "Bad Request"
+    );
   }
 };

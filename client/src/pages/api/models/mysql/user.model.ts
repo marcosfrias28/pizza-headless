@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt';
-import { createConnection } from 'mysql2/promise';
+import { createConnection, type Query, type QueryResult } from 'mysql2/promise';
 import MYSQL_CONFIG from '../../config/sql.config';
 
 const connection = await createConnection(MYSQL_CONFIG as any);
 
 interface User {
-    name?: string;
-    email: string;
-    password: string;
+    name?: FormDataEntryValue;
+    email: FormDataEntryValue;
+    password: FormDataEntryValue;
 }
 
 export class UserModel {
@@ -26,11 +26,12 @@ export class UserModel {
     }
     static async login({email, password} : User) {
         try {
-            const [result] = await connection.query('SELECT password FROM Users WHERE email = ?;', [email]) as any[];
-            const isValid = await bcrypt.compare(password, result[0].password);
+            const [result] : any[] = await connection.query('SELECT password FROM Users WHERE email = ?;', [email]) as QueryResult[];
+            if (result.length === 0) return {error: 'User not found'};
+            const isValid = await bcrypt.compare(password as string, result[0].password);
             if (isValid){
                 const [user] = await connection.query('SELECT BIN_TO_UUID(id) as id, name, email FROM Users WHERE email = ?;', [email]) as any[];
-                // console.log(user[0].email + ' logged in');
+                console.log(user[0].email + ' logged in');
                 return user[0];
             }
             return {error: 'Invalid credentials'};

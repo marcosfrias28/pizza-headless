@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RegisterForm from "../components/Register/RegisterForm.tsx";
 ---
 
 <Layout title="Register - Pizza Headless.">
@@ -29,103 +30,7 @@ import Layout from "../layouts/Layout.astro";
                     >
                         Create an account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" method="post" action={`https://localhost:8080/user/register`}>
-                        <div>
-                            <label
-                                for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900"
-                                >Name</label
-                            >
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="John Doe"
-                                required=""
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="email"
-                                class="block mb-2 text-sm font-medium text-gray-900"
-                                >Your email</label
-                            >
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="name@email.com"
-                                required=""
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900"
-                                >Password</label
-                            >
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                required=""
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="confirm-password"
-                                class="block mb-2 text-sm font-medium text-gray-900"
-                                >Confirm password</label
-                            >
-                            <input
-                                type="password"
-                                name="confirm-password"
-                                id="confirm-password"
-                                placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                required=""
-                            />
-                        </div>
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input
-                                    id="terms"
-                                    aria-describedby="terms"
-                                    type="checkbox"
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                                    required=""
-                                />
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label
-                                    for="terms"
-                                    class="font-light text-gray-700"
-                                    >I accept the <a
-                                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                        href="#">Terms and Conditions</a
-                                    ></label
-                                >
-                            </div>
-                        </div>
-                        <button
-                            type="submit"
-                            class="w-full bg-[#F6CE40] py-3 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
-                            >Create an account</button
-                        >
-                        <p
-                            class="text-sm font-light text-gray-500 dark:text-gray-400"
-                        >
-                            Already have an account? <a
-                                href="/login"
-                                  class="p-2 text-gray-700 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
-                                >Login here</a
-                            >
-                        </p>
-                    </form>
+                    <RegisterForm client:load>
                 </div>
             </div>
         </div>
