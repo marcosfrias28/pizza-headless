@@ -21,14 +21,14 @@ const Pizza = defineTable({
 const Ingredient = defineTable({
   columns: {
     id: column.text({primaryKey: true, unique: true, nullable: false}),
-    name: column.text()
+    name: column.text({unique: true, nullable: false})
   }
 })
 
 const PizzaIngredient = defineTable({
   columns: {
-    pizza_id: column.text(),
-    ingredient_id: column.text()
+    pizza_id: column.text({references: () => Pizza.columns.id}),
+    ingredient_id: column.text({references: () =>  Ingredient.columns.id})
   }
 })
 
