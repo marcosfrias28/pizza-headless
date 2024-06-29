@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import {HomeMenu} from "../components/HomeMenu.tsx";
 
+const cookies = Astro.response.headers.getSetCookie();
+console.log(cookies);
 
 ---
 

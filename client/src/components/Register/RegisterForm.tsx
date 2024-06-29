@@ -6,7 +6,7 @@ interface Props {
     error?: boolean;
 }
 
-function SuccessMessage(props: Props) {
+export function SuccessMessage(props: Props) {
 
     const {error, children} = props;
 
@@ -17,7 +17,7 @@ function SuccessMessage(props: Props) {
  )
 }
 
-interface Message {
+export interface Message {
     error?: string;
     message?: string;
 }
@@ -53,7 +53,7 @@ function RegisterForm() {
             setMessage(data);
             return;
         }
-        setMessage(data.message);
+        setMessage(data);
     }
   return (
     <form

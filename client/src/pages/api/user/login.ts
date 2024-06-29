@@ -2,20 +2,19 @@ import { type APIContext, type APIRoute } from "astro";
 import { UserModel } from "../models/astrodb/user.model";
 import { res } from "../utils/Response";
 import jwt from 'jsonwebtoken';
-import dotenv from "dotenv";
+import {config} from 'dotenv';
 
-dotenv.config();
+config();
 
 export const POST : APIRoute = async ({request, cookies} : APIContext) => {
     const formData = await request.formData();
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-    console.log(email, password);
-    const user = await UserModel.login({email, password});
-    if (user.error) {
-        return res({error: user.error}, 400, "Bad Request");
+    const loginResult = await UserModel.login({email, password});
+    if (loginResult.error) {
+        return res({error: loginResult.error}, 400, "Bad Request");
     }
-    const token = jwt.sign({ id: user.id, email: user.email}, process.env.TOKEN_SECRET as string, {
+    const token = jwt.sign({ id: loginResult.user?.id, email: loginResult.user?.email}, process.env.TOKEN_SECRET as string, {
         expiresIn: '2h'
     });
     cookies.set('access-token', token, {
@@ -24,5 +23,5 @@ export const POST : APIRoute = async ({request, cookies} : APIContext) => {
         sameSite: 'strict',
         maxAge: 60 * 60 * 2
     })
-    return res({user}, 200, "OK");
+    return res({loginResult}, 200, "OK");
 }
