@@ -1,12 +1,8 @@
 import { createConnection, createPool } from "mysql2/promise";
-import MYSQL_CONFIG from "../../config/sql.config";
 import type { Pizza } from "../../../../types/PizzaType";
+import { db, column, Pizza as PizzaTable, PizzaIngredient, eq, count as Counter } from "astro:db";
 
-const connection = createPool({
-  ...MYSQL_CONFIG as any,
-});
-
-type id = { id: string | undefined };
+type id = { id: string};
 
 interface PizzaParams {
   name: string | undefined;
@@ -25,18 +21,20 @@ export class PizzaModel {
     page ? page = page : page = 0; // if page is defined, page = page, else page = 0
     offset = page * limit;
     //-------------------------
+    const pizzaCount = await db.select({
+      count: Counter(),
+    }).from(PizzaTable);
 
-    const [count] = (await connection.query(
-      "SELECT COUNT(*) as count FROM Pizza"
-    )) as any[];
-    const pizzaCount = count[0]["count"];
-    const totalPages = Math.ceil(pizzaCount / (perPage || limit));
+    const totalPages = Math.ceil(Number(pizzaCount) / (perPage || limit));
     if (page < totalPages) {
       try {
-        const [pizza]: any[] = await connection.query(
-          "SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza ORDER BY name LIMIT ? OFFSET ?;",
-          [limit, offset]
-        );
+        const pizza = await db.select({
+          id: PizzaTable.id,
+          name: PizzaTable.name,
+          price: PizzaTable.price,
+          cover: PizzaTable.cover,
+        }).from(PizzaTable).orderBy(PizzaTable.name).limit(limit).offset(offset);
+
         if (name) {
           const pizzaName = pizza.filter((p: any) =>
             p.name.toLowerCase().includes(name.toLowerCase())
@@ -52,72 +50,25 @@ export class PizzaModel {
     }
   }
   static async getAllNames() {
-    const [allNames] = await connection.query("SELECT name FROM Pizza");
+    const allNames = await db.select({
+      name: PizzaTable.name,
+    }).from(PizzaTable);
+
     return allNames;
   }
   static async getById({ id }: id) {
     try {
-      const [pizzaById] = (await connection.query(
-        "SELECT BIN_TO_UUID(id) id, name, price, cover FROM Pizza WHERE ID = UUID_TO_BIN(?)",
-        [id]
-      )) as any[];
-      if (pizzaById.lemght === 0) return { error: "Pizza not found" };
+      const pizzaById = await db.select({
+        id: PizzaTable.id,
+        name: PizzaTable.name,
+        price: PizzaTable.price,
+        cover: PizzaTable.cover,
+      }).from(PizzaTable).where(eq(PizzaTable.id, id));
+
+      if (pizzaById.length === 0) return { error: "Pizza not found" };
       return pizzaById[0];
     } catch {
       return { error: "Pizza not found" };
     }
   }
-  static async create({ name, price, cover, ingredients }: Pizza) {
-    const id = crypto.randomUUID();
-    try {
-      await connection.query(
-        "INSERT INTO Pizza (id, name, price, cover) VALUES (UUID_TO_BIN(?), ?, ?, ?)",
-        [id, name, price, cover]
-      );
-    } catch {
-      return { error: "Something went wrong creating the pizza" };
-    }
-    try {
-      ingredients.forEach(async (ingredient) => {
-        const [result] = (await connection.query(
-          "SELECT id FROM Ingredient WHERE name = ?",
-          [ingredient]
-        )) as any[];
-        const ingredient_id = result[0]?.id;
-        if (ingredient_id) {
-          console.log(ingredient_id);
-          await connection.query(
-            "INSERT INTO PizzaIngredient (pizza_id, ingredient_id) VALUES (UUID_TO_BIN(?), ?)",
-            [id, ingredient_id]
-          );
-        } else {
-          const [result] = (await connection.query(
-            "INSERT INTO Ingredient (name) VALUES (?)",
-            [ingredient]
-          )) as any[];
-          const ingredient_id = result[0]?.insertId;
-          await connection.query(
-            "INSERT INTO PizzaIngredient (pizza_id, ingredient_id) VALUES (UUID_TO_BIN(?), ?)",
-            [id, ingredient_id]
-          );
-        }
-      });
-    } catch (error) {
-      return { error: "Something went wrong handling the ingredients" };
-    }
-    return {
-      success: "Pizza, Ingredients, and PizzaIngredients created successfully",
-    };
-  }
-  static async delete({ id }: id) {
-    try {
-      await connection.query("DELETE FROM Pizza WHERE ID = UUID_TO_BIN(?)", [
-        id,
-      ]);
-      return { success: "Pizza deleted" };
-    } catch {
-      return { error: "Pizza not found" };
-    }
-  }
-  static async update({ id, input }: { id: id; input: any }) {}
 }

@@ -1,5 +1,5 @@
 import type { APIRoute, Params } from "astro";
-import { PizzaModel } from "./models/mysql/pizza.model";
+import { PizzaModel } from "./models/astrodb/pizza.model";
 import { res } from "./utils/Response";
 import { validatePizza } from "./validations/pizzaSchema";
 
@@ -19,5 +19,3 @@ export const POST : APIRoute = async ({request}) => {
   if (json.error) return res(json, 500, "Internal Server Error");
   return res(json, 200, "OK");
  }
-
- 
