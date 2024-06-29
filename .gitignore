@@ -8,6 +8,7 @@ models/app.http
 
 # dependencies
 node_modules/
+.env.*
 .env
 server/node_modules/
 
@@ -26,3 +27,4 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+.vercel
