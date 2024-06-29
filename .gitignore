@@ -8,19 +8,14 @@ models/app.http
 
 # dependencies
 node_modules/
-.env.*
-.env
 server/node_modules/
+.env.keys
 
 # logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# environment variables
-.env
-.env.production
 
 # macOS-specific files
 .DS_Store
