@@ -9,9 +9,6 @@ models/app.http
 # dependencies
 node_modules/
 server/node_modules/
-.env.keys
-.env.production
-.env.development
 
 # logs
 npm-debug.log*

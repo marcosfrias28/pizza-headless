@@ -1,13 +1,11 @@
 import type { Pizza } from "../types/PizzaType.js";
 import {
-  useQuery,
   QueryClient,
   QueryClientProvider,
   useInfiniteQuery,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +44,7 @@ function LoadingArticle() {
 
 function Cards({ perPage }: { perPage: number }) {
 
-  const { data, error, isPending, fetchNextPage } = useInfiniteQuery({
+  const { data, isPending, fetchNextPage } = useInfiniteQuery({
     queryKey: ["pizzas"],
     queryFn: async ({ pageParam }) => {
       const res = await axios.get(
