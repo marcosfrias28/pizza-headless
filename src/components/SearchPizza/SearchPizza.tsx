@@ -4,8 +4,8 @@ import type { object } from "zod";
 
 function SearchFormPizza() {
     const [filter, setFilter] = useState(null);
-    const [name, setName] = useState('Name')
-    const [nameList, setNameList] = useState(undefined as any)
+    // const [name, setName] = useState('Name')
+    const [nameList] = useState(undefined as any)
 
     useEffect(() => {
         // fetch('https://pizza-api.up.railway.app/pizza/names')
