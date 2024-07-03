@@ -13,8 +13,7 @@ export const POST: APIRoute = async ({ request }: APIContext) => {
   const VALIDATION = await validateUser({ name, email, password });
   if (VALIDATION.success === true) {
     try {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
+      const hashedPassword = await bcrypt.hash(password, 10);
       const user = { name, email, password: hashedPassword };
       const message = await UserModel.register(user);
       return res(message, 200, "OK");

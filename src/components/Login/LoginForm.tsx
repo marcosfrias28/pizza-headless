@@ -23,9 +23,9 @@ function LoginForm() {
       .then(({ data }) => setMessage(data))
       .catch((error) => setMessage(JSON.parse(error.request.response)));
   };
-  const { error: errorMessage, message: successMessage } = message || {
+  const { error: errorMessage, success: successMessage } = message || {
     error: "",
-    message: "",
+    success: "",
   };
 
   return (

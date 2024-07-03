@@ -6,22 +6,22 @@ import {config} from 'dotenv';
 
 config();
 
-export const POST : APIRoute = async ({request, cookies} : APIContext) => {
+export const POST : APIRoute = async ({request} : APIContext) => {
     const formData = await request.formData();
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const loginResult = await UserModel.login({email, password});
-    if (loginResult.error) {
+    if (loginResult?.error) {
         return res({error: loginResult.error}, 400, "Bad Request");
     }
-    const token = jwt.sign({ id: loginResult.user?.id, email: loginResult.user?.email}, process.env.TOKEN_SECRET as string, {
+    const token = jwt.sign({ id: loginResult?.user?.id, email: loginResult?.user?.email}, process.env.TOKEN_SECRET as string, {
         expiresIn: '2h'
     });
-    cookies.set('access-token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 2
-    })
-    return res({loginResult}, 200, "OK");
+    return new Response(JSON.stringify(loginResult), {
+        status: 200,
+        headers: {
+          'Set-Cookie': `access-token=${token}; HttpOnly; Path=/; Max-Age=3600`,
+          'Content-Type': 'application/json'
+        }
+      });
 }
