@@ -3,24 +3,29 @@ import { UserModel } from "../models/astrodb/user.model";
 import { res } from "../utils/Response";
 import jwt from 'jsonwebtoken';
 import {config} from 'dotenv';
-
-config();
+config(); // Load the environment variables
 
 export const POST : APIRoute = async ({request} : APIContext) => {
     const formData = await request.formData();
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const loginResult = await UserModel.login({email, password});
+
+    // If there is an error, return a 400 status code
     if (loginResult?.error) {
         return res({error: loginResult.error}, 400, "Bad Request");
     }
-    const token = jwt.sign({ id: loginResult?.user?.id, email: loginResult?.user?.email}, process.env.TOKEN_SECRET as string, {
-        expiresIn: '2h'
+
+    // Create a token and set it as a cookie
+    const { user } = loginResult;
+    const token = jwt.sign({ user: user}, process.env.TOKEN_SECRET as string, {
+      expiresIn: '1h'
     });
+
     return new Response(JSON.stringify(loginResult), {
         status: 200,
         headers: {
-          'Set-Cookie': `access-token=${token}; HttpOnly; Path=/; Max-Age=3600`,
+          'Set-Cookie': `access-token=${token}; HttpOnly; Max-Age=3600; Path=/`,
           'Content-Type': 'application/json'
         }
       });

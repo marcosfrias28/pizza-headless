@@ -3,10 +3,26 @@ import { db, Users, eq, and } from "astro:db";
 
 type NewUser = typeof Users.$inferInsert;
 
+export interface LoginParams {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  user?: {
+    id: string;
+    name: string;
+    email: string;
+  };
+  success?: string;
+  error?: string;
+}
+
 export class UserModel {
-  static async register(user: NewUser) {
-    const { name, email, password } = user as NewUser;
-    const id = crypto.randomUUID();
+  static async register({ name, email, password }: NewUser) {
+
+    const id = crypto.randomUUID(); //Random id generator for the user
+
     try {
       const result = await db
         .select({
@@ -23,12 +39,13 @@ export class UserModel {
         email,
         password,
       });
-      return { user: { id, name, email }, message: "User created succesfully" };
+      return { user: { id, name, email }, success: "User created succesfully" };
     } catch {
       return { error: "Internal Error creating user" };
     }
   }
-  static async login({ email, password }: { email: string; password: string }) : Promise<{ user: any, success: string } | { error: string }> {
+
+  static async login({ email, password }: LoginParams): Promise<LoginResponse> {
     try {
       const result = await db
         .select({
@@ -36,12 +53,19 @@ export class UserModel {
         })
         .from(Users)
         .where(eq(Users.email, email));
-      const hashedPassword = result[0]?.password;
 
-      if (result.length === 0)
-        return { error: "Invalid password or email. check it out" };
+        if (result.length < 1)
+          return { error: "Invalid password or email. check it out" };
+
+      // Check if the user exists and if the password is correct
+      const hashedPassword = result[0]?.password;
       const isValid = await bcrypt.compare(password, hashedPassword);
-      if (!isValid) return { error: "Invalid password or email. check it out" };
+
+      // If the user does not exist or the password is incorrect, return an error
+      if (!isValid)
+        return { error: "Invalid password or email. check it out" };
+
+      // If the user exists and the password is correct,Add the user to the dabatase
       const user = await db
         .select({
           id: Users.id,
@@ -50,7 +74,7 @@ export class UserModel {
         })
         .from(Users)
         .where(eq(Users.email, email));
-        return { user: user[0], success: "User logged in" };
+      return { user: user[0], success: "User logged in, Redirecting..." };
     } catch {
       return { error: "Internal Error logging in user" };
     }
@@ -59,7 +83,7 @@ export class UserModel {
     try {
       await db.delete(Users).where(eq(Users.id, id));
       return {
-        message: "User deleted, this action persists and cannot be deactivated",
+        success: "User deleted, this action persists and cannot be deactivated",
       };
     } catch {
       return { error: "Error deleting user" };

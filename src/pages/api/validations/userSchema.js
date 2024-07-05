@@ -23,5 +23,9 @@ const userSchema = z.object({
 })
 
 export async function validateUser(user) {
-    return userSchema.safeParse(user);
+    try {
+        return userSchema.parse(user);
+    } catch (error) {
+        return {error: error.issues[0].message};
+    }
 }

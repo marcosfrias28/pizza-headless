@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { res } from "../utils/Response";
-import { PizzaModel } from "../models/astrodb/pizza.model";
+import { PizzaModel } from "../models/astrodb/pizza.model.ts";
 
 export const GET : APIRoute = async ({params, request}) => {
     const { id } = params;
