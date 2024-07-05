@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SuccessMessage, type Message } from "../Register/RegisterForm";
 
 function LoginForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [message, setMessage] = useState<Message>();
+  const [message, setMessage] = useState<Message>({ error: "", success: "" });
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,10 +23,17 @@ function LoginForm() {
       .then(({ data }) => setMessage(data))
       .catch((error) => setMessage(JSON.parse(error.request.response)));
   };
-  const { error: errorMessage, success: successMessage } = message || {
-    error: "",
-    success: "",
-  };
+  const { error, success } = message;
+
+  useEffect(() => {
+    if (message.success) {
+      setTimeout(() => {
+        return window.history.back()
+      }, 1000)
+    }
+  }, [message]);
+
+ 
 
   return (
     <form onSubmit={login} id="login-form" className="space-y-4 md:space-y-6">
@@ -76,7 +83,7 @@ function LoginForm() {
         </div>
         <div className="ml-3 text-sm">
           <label htmlFor="terms" className="font-light text-gray-700">
-            I accept the{" "}
+            I accept the
             <a
               className="font-medium text-primary-600 hover:underline dark:text-primary-500"
               href="#"
@@ -86,8 +93,8 @@ function LoginForm() {
           </label>
         </div>
       </div>
-      <SuccessMessage error={errorMessage ? true : false}>
-        {errorMessage ? errorMessage : successMessage}
+      <SuccessMessage error={error ? true : false}>
+        {error ? error : (success)}
       </SuccessMessage>
       <button
         type="submit"
@@ -96,7 +103,7 @@ function LoginForm() {
         Login
       </button>
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don't have an account yet?{" "}
+        Don't have an account yet?
         <a
           href="/register"
           className="p-2 text-gray-700 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
