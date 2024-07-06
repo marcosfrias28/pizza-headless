@@ -19,7 +19,7 @@ export function SuccessMessage(props: Props) {
 
 export interface Message {
     error?: string;
-    message?: string;
+    success?: string;
 }
 
 function RegisterForm() {
@@ -27,7 +27,7 @@ function RegisterForm() {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [message, setMessage] = useState<Message>({});
+    const [message, setMessage] = useState<Message>({error: '', success: ''});
 
 
     const register = async (e: FormEvent) => {
@@ -55,6 +55,7 @@ function RegisterForm() {
         }
         setMessage(data);
     }
+    const {error, success} = message;
   return (
     <form
     onSubmit={register}
@@ -154,7 +155,7 @@ function RegisterForm() {
           </label>
         </div>
       </div>
-      <SuccessMessage error={message.error ? true : false}>{message.error ? message.error : message.message}</SuccessMessage>
+      <SuccessMessage error={error ? true : false}>{error ? error : success}</SuccessMessage>
       <button
         type="submit"
         className="w-full bg-[#F6CE40] py-3 rounded-lg hover:scale-105 transition-transform duration-300 font-semibold text-center"
