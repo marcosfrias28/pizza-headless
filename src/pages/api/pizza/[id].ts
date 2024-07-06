@@ -6,7 +6,7 @@ interface Json {
     error?: string;
 }
 
-export const GET : APIRoute = async ({params, request}) => {
+export const GET : APIRoute = async ({params}) => {
     const { id } = params;
     if (!id) return res({error: 'Missing id'}, 400, 'Bad Request');
     const json = await PizzaModel.getById({id}) as Json;

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { db, Users, eq, and } from "astro:db";
+import { db, Users, eq } from "astro:db";
 
 type NewUser = typeof Users.$inferInsert;
 
@@ -89,8 +89,8 @@ export class UserModel {
       return { error: "Error deleting user" };
     }
   }
-  static async update({ input }: any) {
-    const { email, password, newEmail, newName, newPassword } = input;
+  static async update() {
+    // const { email, password, newEmail, newName, newPassword } = input;
     // if (newEmail) {
     //   try {
     //     await db.update(Users).set({
