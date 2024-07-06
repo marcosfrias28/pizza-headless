@@ -1,4 +1,4 @@
-import type { APIRoute, Params } from "astro";
+import type { APIRoute } from "astro";
 import { PizzaModel } from "./models/astrodb/pizza.model";
 import { res } from "./utils/Response";
 import { validatePizza } from "./validations/pizzaSchema";
@@ -13,7 +13,7 @@ interface RequestGetJSON {
   success?: string;
 }
 
-export const GET : APIRoute = async ({params, request}: {params: Params;request: Request;}) => {
+export const GET : APIRoute = async ({request}: {request: Request;}) => {
   const url = new URL(request.url);
   const { name, ingredients, perPage, page } = Object.fromEntries(url.searchParams);
   const pizza = await PizzaModel.getAllPizzas({ page: parseInt(page), perPage: parseInt(perPage), name, ingredients }) as RequestGetJSON;

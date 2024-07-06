@@ -130,5 +130,8 @@ export class PizzaModel {
       return { error: "Pizza not found" };
     }
   }
-  static async update({ id, input }: { id: id; input: any }) {}
+  static async update({ id, input }: { id: id; input: any }) {
+    console.log(id, input, 'Working on progress'); //TODO: Update the pizza
+    return { success: "Pizza updated" };
+  }
 }

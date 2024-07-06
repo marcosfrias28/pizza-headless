@@ -1,6 +1,5 @@
 import { useEffect, useState, type SetStateAction } from "react";
 import { ingredients } from "../../utlis/ingredients";
-import type { object } from "zod";
 
 function SearchFormPizza() {
     const [filter, setFilter] = useState(null);
