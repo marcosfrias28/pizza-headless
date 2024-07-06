@@ -90,7 +90,7 @@ export class UserModel {
     }
   }
   static async update({ input }: any) {
-    // const { email, password, newEmail, newName, newPassword } = input;
+    const { email, password, newEmail, newName, newPassword } = input;
     // if (newEmail) {
     //   try {
     //     await db.update(Users).set({
@@ -121,8 +121,8 @@ export class UserModel {
     //       [newPassword, email, password]
     //     );
     //   } catch {
-    //     return { error: "Error updating user password" };
     //   }
     // }
+    return { error: "Error updating user password" };
   }
 }

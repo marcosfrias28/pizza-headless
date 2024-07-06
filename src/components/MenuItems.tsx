@@ -47,11 +47,9 @@ function Cards({ perPage }: { perPage: number }) {
   const { data, isPending, fetchNextPage } = useInfiniteQuery({
     queryKey: ["pizzas"],
     queryFn: async ({ pageParam }) => {
-      const res = await axios.get(
+      return axios.get(
         `/api/pizza?page=${pageParam}&perPage=${perPage}`
-      );
-      const data = await res.data;
-      return data;
+      ).then(res => res.data)
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {

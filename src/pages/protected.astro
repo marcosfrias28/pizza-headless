@@ -1,0 +1,35 @@
+---
+import type { Payload, User } from "../components/Header/NavBar.astro";
+import Layout from "../layouts/Layout.astro";
+import jwt from 'jsonwebtoken'
+
+let payload: Payload | undefined;
+let user: User | undefined;
+const token = Astro.cookies.get("access-token")?.value;
+if (token) {
+    payload = jwt.verify(token, process.env.TOKEN_SECRET as string) as Payload;
+}
+
+user = payload?.user;
+
+---
+
+<Layout title="User Profile">
+    {
+        !user && (
+            <>
+                <div class="w-full min-h-dvh h-full flex items-center justify-center">
+                    <p>Access Not Authorized</p>
+                </div>
+            </>
+        )
+    }
+    {
+        user && (
+            <div class="w-full min-h-dvh h-full flex flex-col items-center justify-center">
+                <h1>Welcome, {user.name}</h1>
+                <p>This is a protected page</p>
+            </div>
+        )
+    }
+</Layout>

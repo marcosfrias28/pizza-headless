@@ -1,7 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import LoginForm from "../components/Login/LoginForm.tsx";
+import type { Payload, User } from "../components/Header/NavBar.astro";
+import jwt from "jsonwebtoken";
+import LogoutButton from "../components/Logout/LogoutButton.tsx";
 
+let payload: Payload | undefined;
+let user: User | undefined;
+const token = Astro.cookies.get("access-token")?.value;
+if (token) {
+  payload = jwt.verify(token, process.env.TOKEN_SECRET as string) as Payload;
+}
+
+user = payload?.user;
 ---
 
 <Layout title="Login - Pizza Headless.">
@@ -21,19 +32,32 @@ import LoginForm from "../components/Login/LoginForm.tsx";
         <img width="20px" height="20px" src="/logo.svg" alt="logo" />
         Pizza Headless
       </a>
-      <div
-        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0"
-      >
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1
-            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4  md:mb-6 sm:text-3xl"
-          >
-            Login
-          </h1>
-          <LoginForm client:load />
-
-        </div>
-      </div>
+      {
+        (!user && (
+          <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4  md:mb-6 sm:text-3xl">
+                Login
+              </h1>
+              <LoginForm client:load />
+            </div>
+          </div>
+        )) || (
+          <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8 text-center">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl sm:text-2xl">
+                You're alredy logged 
+              </h1>
+              <p class="font-semibold opacity-40">
+              {user?.name}
+              </p>
+              <div class="w-full flex justify-center">
+                <LogoutButton client:load />
+              </div>
+            </div>
+          </div>
+        )
+      }
     </div>
   </section>
 </Layout>

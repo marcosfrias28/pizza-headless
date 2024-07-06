@@ -10,7 +10,7 @@ export function HomeMenu() {
   useEffect(() => {
     axios.get("/api/pizza").then((res) => {
       setLoading(true);
-      setData(res.data.pizza);
+      setData(res.data);
     }).finally(()=> setLoading(false));
   }, []);
 
@@ -19,7 +19,7 @@ export function HomeMenu() {
         id="cards"
         className="w-full min-h-72 gap-6 mx-auto my-14 flex flex-col md:flex-row flex-wrap justify-center items-center max-w-screen-2xl"
       >
-        {loading &&
+        {loading || !data &&
           [...Array(4)].map((_, i) => (
             <LoadingArticle key={i + 10}></LoadingArticle>
           ))}

@@ -38,6 +38,7 @@ models/app.http
 node_modules/
 server/node_modules/
 .env.keys
+.env
 
 # logs
 npm-debug.log*
