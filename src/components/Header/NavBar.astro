@@ -1,5 +1,31 @@
 ---
-import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import { or } from "astro:db";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+import { Toaster, toast } from "sonner";
+import LogoutButton from '../Logout/LogoutButton'
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+}
+export interface Payload {
+    user: User;
+    iat: number;
+    exp: number;
+}
+
+let payload: Payload | undefined;
+let user: User | undefined;
+const token = Astro.cookies.get("access-token")?.value;
+if (token) {
+    payload = jwt.verify(token, process.env.TOKEN_SECRET as string) as Payload;
+}
+
+user = payload?.user;
+
+
 ---
 
 <header class="bg-white w-full">
@@ -7,14 +33,14 @@ import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
         class="w-full md:w-max lg:flex justify-between items-center container mx-auto min-h-[138px]"
     >
         <div class="flex justify-between items-center gap-10">
-            <Astronav closeOnClick>
+            <nav>
                 <div class="">
                     <a href="/"><img src="/logo.svg" alt="" /></a>
                     <div class="block lg:hidden">
-                        <MenuIcon class="w-4 h-4 text-gray-800" />
+                        <div class="w-4 h-4 text-gray-800"></div>
                     </div>
                 </div>
-                <MenuItems class="hidden lg:flex">
+                <div class="hidden lg:flex">
                     <ul class="flex flex-col lg:flex-row lg:gap-5">
                         <li>
                             <a href="/">Home</a>
@@ -29,16 +55,30 @@ import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
                             <a href="/">Blog</a>
                         </li>
                     </ul>
-                </MenuItems>
-            </Astronav>
+                </div>
+            </nav>
         </div>
         <div class="flex gap-3">
-            <a
-            href="/login"
-                class="h-[44px] rounded-[5px] bg-[#f6ce40] px-10 text-black font-semibold text-left text-base flex items-center justify-center"
-            >
-                Log In
-            </a>
+            {
+                !user && (
+                    <a
+                        href="/login"
+                        class="h-[44px] rounded-[5px] bg-[#f6ce40] px-10 text-black font-semibold text-left text-base flex items-center justify-center"
+                    >
+                        Log In
+                    </a>
+                )
+            }
+            {
+                user && (
+                    <div class="flex flex-nowrap gap-4 items-center">
+                        <a href="/protected">Welcome Back {user.name}</a>
+                        {
+                            <LogoutButton client:load />
+                        }
+                    </div>
+                )
+            }
             <button
                 class="w-11 h-[44px] rounded-[5px] bg-[#f6ce40] flex items-center justify-center"
             >
@@ -58,3 +98,5 @@ import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
         </div>
     </nav>
 </header>
+
+<Toaster client:load richColors position={"top-center"}/>
