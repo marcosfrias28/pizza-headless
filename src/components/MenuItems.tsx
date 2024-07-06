@@ -4,7 +4,6 @@ import {
   QueryClientProvider,
   useInfiniteQuery,
 } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
 
 const queryClient = new QueryClient();
@@ -18,7 +17,6 @@ export function MenuItems({ perPage = 12 }: CardsProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Cards perPage={perPage} />
-      <ReactQueryDevtools></ReactQueryDevtools>
     </QueryClientProvider>
   );
 }

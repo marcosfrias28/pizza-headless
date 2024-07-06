@@ -39,6 +39,12 @@ export class PizzaModel {
         );
         return pizzaName;
       }
+      if (ingredients) {
+        const pizzaIngredients = pizza.filter((p: any) =>
+          p.ingredients.toLowerCase().includes(ingredients.toLowerCase())
+        );
+        return pizzaIngredients;
+      }
       return pizza;
     } catch {
       return { error: "Something went wrong getting the pizzas" };

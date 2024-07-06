@@ -10,8 +10,5 @@ config();
 export default defineConfig({
   integrations: [tailwind(), react(), db()],
   output: 'server',
-  adapter: vercel(),
-  redirects: {
-    '/client/*': '/*'
-  }
+  adapter: vercel()
 });
