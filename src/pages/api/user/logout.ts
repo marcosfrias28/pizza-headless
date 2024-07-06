@@ -1,6 +1,6 @@
-import type { APIContext, APIRoute } from "astro";
+import type { APIRoute } from "astro";
 
-export const POST : APIRoute = async (context : APIContext) => {
+export const POST : APIRoute = async () => {
     return new Response(JSON.stringify({success: 'User Logout Succesfully'}), {
         status: 200,
         headers: {
