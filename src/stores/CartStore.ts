@@ -13,7 +13,7 @@ interface ICartStore {
 
 const useCartStore = create(persist<ICartStore>((set, get) => ({
   isOpen: false,
-  SetIsOpen: (isOpen: boolean) => set(!isOpen),
+  SetIsOpen: (isOpen: boolean) => set(state => ({ isOpen })),
   items: [],
   addItem: (item) => set(state => ({ items: [...state.items, item] })),
   removeItem: (item) => set(state => ({ items: state.items.filter(i => i !== item) })),
