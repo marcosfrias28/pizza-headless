@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro check && astro build --remote",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "ts-standard",
+    "autocode": "ts-standard --fix"
   },
   "dependencies": {
     "@astrojs/check": "0.7.0",
@@ -26,12 +28,14 @@
     "react-dom": "18.3.1",
     "sonner": "1.5.0",
     "tailwindcss": "3.4.4",
-    "typescript": "5.4.5"
+    "typescript": "5.4.5",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@tanstack/react-query": "5.50.1",
     "@types/bcrypt": "5.0.2",
     "@types/jsonwebtoken": "9.0.6",
+    "ts-standard": "^12.0.2",
     "zod": "3.23.8"
   }
 }

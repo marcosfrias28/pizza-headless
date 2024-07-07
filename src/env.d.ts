@@ -2,7 +2,7 @@
 /// <reference types="astro" />
 
 declare namespace App {
-    interface Locals {
-        user
-    }
+  interface Locals {
+    user
+  }
 }d

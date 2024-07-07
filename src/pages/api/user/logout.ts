@@ -1,11 +1,11 @@
-import type { APIRoute } from "astro";
+import type { APIRoute } from 'astro'
 
-export const POST : APIRoute = async () => {
-    return new Response(JSON.stringify({success: 'User Logout Succesfully'}), {
-        status: 200,
-        headers: {
-            'Set-Cookie': 'access-token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
-          'Content-Type': 'application/json'
-        }
-      });
+export const POST: APIRoute = async () => {
+  return new Response(JSON.stringify({ success: 'User Logout Succesfully' }), {
+    status: 200,
+    headers: {
+      'Set-Cookie': 'access-token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
+      'Content-Type': 'application/json'
+    }
+  })
 }
