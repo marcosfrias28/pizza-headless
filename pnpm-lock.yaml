@@ -18,7 +18,7 @@ dependencies:
     specifier: 5.1.0
     version: 5.1.0(astro@4.11.5)(tailwindcss@3.4.4)
   '@astrojs/vercel':
-    specifier: ^7.7.2
+    specifier: 7.7.2
     version: 7.7.2(astro@4.11.5)(react@18.3.1)
   '@types/react':
     specifier: 18.3.3
@@ -27,7 +27,7 @@ dependencies:
     specifier: 18.3.0
     version: 18.3.0
   astro:
-    specifier: ^4.11.5
+    specifier: 4.11.5
     version: 4.11.5(typescript@5.4.5)
   axios:
     specifier: 1.7.2
@@ -57,7 +57,7 @@ dependencies:
     specifier: 5.4.5
     version: 5.4.5
   zustand:
-    specifier: ^4.5.4
+    specifier: 4.5.4
     version: 4.5.4(@types/react@18.3.3)(react@18.3.1)
 
 devDependencies:
@@ -71,7 +71,7 @@ devDependencies:
     specifier: 9.0.6
     version: 9.0.6
   ts-standard:
-    specifier: ^12.0.2
+    specifier: 12.0.2
     version: 12.0.2(typescript@5.4.5)
   zod:
     specifier: 3.23.8
@@ -212,7 +212,7 @@ packages:
       remark-parse: 11.0.0
       remark-rehype: 11.1.0
       remark-smartypants: 3.0.1
-      shiki: 1.10.1
+      shiki: 1.10.3
       unified: 11.0.5
       unist-util-remove-position: 5.0.0
       unist-util-visit: 5.0.0
@@ -1398,8 +1398,10 @@ packages:
     dev: false
     optional: true
 
-  /@shikijs/core@1.10.1:
-    resolution: {integrity: sha512-qdiJS5a/QGCff7VUFIqd0hDdWly9rDp8lhVmXVrS11aazX8LOTRLHAXkkEeONNsS43EcCd7gax9LLoOz4vlFQA==}
+  /@shikijs/core@1.10.3:
+    resolution: {integrity: sha512-D45PMaBaeDHxww+EkcDQtDAtzv00Gcsp72ukBtaLSmqRvh0WgGMq3Al0rl1QQBZfuneO75NXMIzEZGFitThWbg==}
+    dependencies:
+      '@types/hast': 3.0.4
     dev: false
 
   /@tanstack/query-core@5.50.1:
@@ -2090,7 +2092,7 @@ packages:
       prompts: 2.4.2
       rehype: 13.0.1
       semver: 7.6.2
-      shiki: 1.10.1
+      shiki: 1.10.3
       string-width: 7.2.0
       strip-ansi: 7.1.0
       tsconfck: 3.1.1(typescript@5.4.5)
@@ -5928,10 +5930,11 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  /shiki@1.10.1:
-    resolution: {integrity: sha512-uafV7WCgN4YYrccH6yxpnps6k38sSTlFRrwc4jycWmhWxJIm9dPrk+XkY1hZ2t0I7jmacMNb15Lf2fspa/Y3lg==}
+  /shiki@1.10.3:
+    resolution: {integrity: sha512-eneCLncGuvPdTutJuLyUGS8QNPAVFO5Trvld2wgEq1e002mwctAhJKeMGWtWVXOIEzmlcLRqcgPSorR6AVzOmQ==}
     dependencies:
-      '@shikijs/core': 1.10.1
+      '@shikijs/core': 1.10.3
+      '@types/hast': 3.0.4
     dev: false
 
   /side-channel@1.0.6:
