@@ -1,221 +1,16 @@
 import { useState } from 'react'
+import useCartStore from '../../stores/CartStore'
 
 type SVGProps = React.SVGProps<SVGSVGElement>
 
 export default function ShoppingCart () {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    },
-    {
-      id: 1,
-      name: 'Product 1',
-      image: '/placeholder.svg',
-      price: 19.99,
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: '/placeholder.svg',
-      price: 29.99,
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: '/placeholder.svg',
-      price: 14.99,
-      quantity: 3
-    }
-  ])
-  const [isCartOpen, setIsCartOpen] = useState(false)
+
+  const {cart, isCartOpen, setIsCartOpen, setCart, clearCart} = useCartStore();
+
+  const handleClearCart = () => {
+    clearCart();
+  }
+
   const handleIncrement = (id: any) => {
     setCart(cart.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item)))
   }
@@ -227,19 +22,27 @@ export default function ShoppingCart () {
   }
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
   return (
-    <div className={`group fixed ${isCartOpen ? '' : 'hidden'} z-50 min-h-dvh w-screen bg-black/30`}>
+    <div className={`fixed ${isCartOpen ? '' : 'hidden'} z-50 min-h-dvh w-screen bg-black/30`}>
       {isCartOpen && (
         <div className='absolute min-h-dvh right-0 max-h-[700px] z-50 mt-2 w-full sm:w-[450px] rounded-s-lg border bg-white shadow-lg'>
           <div className='flex flex-col gap-4 p-4'>
             <div className='flex items-center justify-between'>
               <h3 className='text-lg font-medium'>Shopping Cart</h3>
+              <div className='flex flex-nowrap gap-4'>
+              <button onClick={handleClearCart}>
+                      <TrashIcon className='h-4 w-4' />
+                    </button>
               <button onClick={() => setIsCartOpen(false)}>
                 <XIcon className='h-5 w-5' />
               </button>
+              </div>
+
             </div>
-     <div className='flex flex-col gap-4 max-h-[600px] overflow-scroll'>
+     <div className='flex flex-col gap-4 max-h-[600px] overflow-y-scroll px-5'>
               {cart.map((item) => ( <div key={item.id} className='flex items-center justify-between gap-4'>
-                  <div className='flex items-center gap-4'> <img src='/placeholder.svg' alt={item.name} width={64} height={64} className='rounded-md' /><div>
+                  <div className='flex items-center gap-4'> 
+                    <img src='/placeholder.svg' alt={item.name} width={64} height={64} className='rounded-md' />
+                    <div>
                       <h4 className='font-medium'>{item.name}</h4>
                       <p className='text-sm text-muted-foreground'>${item.price.toFixed(2)}</p>
                     </div>
@@ -270,6 +73,14 @@ export default function ShoppingCart () {
       )}
     </div>
   )
+}
+
+function ClearCartModal() {
+  return ( 
+      <div>
+
+      </div>    
+   );
 }
 
 function MinusIcon (props: SVGProps) {
