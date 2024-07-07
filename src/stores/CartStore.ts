@@ -25,7 +25,7 @@ interface ICartStore {
 
 //NO PERSIST STATE, HANDLE IF CART IS OPEN OR NOT
 const CartState = create<CartState>((set) => ({
-  isCartOpen: true,
+  isCartOpen: false,
   setIsCartOpen: (isCartOpen: boolean) => set({isCartOpen}),
 }))
 
