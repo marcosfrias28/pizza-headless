@@ -3,13 +3,9 @@ import useCartStore from '../../stores/CartStore'
 
 type SVGProps = React.SVGProps<SVGSVGElement>
 
-export default function ShoppingCart () {
+export default function ShoppingCart() {
 
-  const {cart, isCartOpen, setIsCartOpen, setCart, clearCart} = useCartStore();
-
-  const handleClearCart = () => {
-    clearCart();
-  }
+  const { cart, isCartOpen, setIsCartOpen, setCart, clearCart } = useCartStore();
 
   const handleIncrement = (id: any) => {
     setCart(cart.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item)))
@@ -21,26 +17,28 @@ export default function ShoppingCart () {
     setCart(cart.filter((item) => item.id !== id))
   }
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-  return (
-    <div className={`fixed ${isCartOpen ? '' : 'hidden'} z-50 min-h-dvh w-screen bg-black/30`}>
-      {isCartOpen && (
-        <div className='absolute min-h-dvh right-0 max-h-[700px] z-50 mt-2 w-full sm:w-[450px] rounded-s-lg border bg-white shadow-lg'>
-          <div className='flex flex-col gap-4 p-4'>
-            <div className='flex items-center justify-between'>
-              <h3 className='text-lg font-medium'>Shopping Cart</h3>
-              <div className='flex flex-nowrap gap-4'>
-              <button onClick={handleClearCart}>
-                      <TrashIcon className='h-4 w-4' />
-                    </button>
-              <button onClick={() => setIsCartOpen(false)}>
-                <XIcon className='h-5 w-5' />
-              </button>
-              </div>
 
-            </div>
-     <div className='flex flex-col gap-4 max-h-[600px] overflow-y-scroll px-5'>
-              {cart.map((item) => ( <div key={item.id} className='flex items-center justify-between gap-4'>
-                  <div className='flex items-center gap-4'> 
+  return (
+    <>
+      <div className={`fixed ${isCartOpen ? '' : 'hidden'} z-50 min-h-dvh w-screen bg-black/30`}>
+        {isCartOpen && (
+          <div className='absolute min-h-dvh right-0 max-h-[700px] z-40 mt-2 w-full sm:w-[450px] rounded-s-lg border bg-white shadow-lg'>
+            <div className='flex flex-col gap-4 p-4'>
+              <div className='flex items-center justify-between'>
+                <h3 className='text-lg font-medium'>Shopping Cart</h3>
+                <div className='flex flex-nowrap gap-4'>
+                  <button onClick={clearCart} className={`${cart[0] ? '' : 'pointer-events-none'}`}>
+                    <TrashIcon className='h-4 w-4' />
+                  </button>
+                  <button onClick={() => setIsCartOpen(false)}>
+                    <XIcon className='h-5 w-5' />
+                  </button>
+                </div>
+
+              </div>
+              <div className='flex flex-col gap-4 max-h-[600px] overflow-y-scroll px-5'>
+                {cart.map((item) => (<div key={item.id} className='flex items-center justify-between gap-4'>
+                  <div className='flex items-center gap-4'>
                     <img src='/placeholder.svg' alt={item.name} width={64} height={64} className='rounded-md' />
                     <div>
                       <h4 className='font-medium'>{item.name}</h4>
@@ -60,30 +58,24 @@ export default function ShoppingCart () {
                     </button>
                   </div>
                 </div>
-              ))}
+                ))}
+              </div>
+              <hr />
+              <div className='flex items-center justify-between'>
+                <p className='text-lg font-medium'>Total:</p>
+                <p className='text-lg font-medium'>${total.toFixed(2)}</p>
+              </div>
+              <button className='w-full bg-bright-sun-300 py-2 rounded-lg shadow-xl '>Proceed to Checkout</button>
             </div>
-            <hr />
-            <div className='flex items-center justify-between'>
-              <p className='text-lg font-medium'>Total:</p>
-              <p className='text-lg font-medium'>${total.toFixed(2)}</p>
-            </div>
-            <button className='w-full bg-bright-sun-300 py-2 rounded-lg shadow-xl '>Proceed to Checkout</button>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
+
   )
 }
 
-function ClearCartModal() {
-  return ( 
-      <div>
-
-      </div>    
-   );
-}
-
-function MinusIcon (props: SVGProps) {
+function MinusIcon(props: SVGProps) {
   return (
     <svg
       {...props}
@@ -102,7 +94,7 @@ function MinusIcon (props: SVGProps) {
   )
 }
 
-function PlusIcon (props: SVGProps) {
+function PlusIcon(props: SVGProps) {
   return (
     <svg
       {...props}
@@ -122,9 +114,10 @@ function PlusIcon (props: SVGProps) {
   )
 }
 
-export function ShoppingCartIcon (props: SVGProps) {
+export function ShoppingCartIcon(props: SVGProps) {
   return (
     <svg
+      {...props}
       width='18'
       height='16'
       viewBox='0 0 18 16'
@@ -140,7 +133,7 @@ export function ShoppingCartIcon (props: SVGProps) {
   )
 }
 
-function TrashIcon (props: SVGProps) {
+function TrashIcon(props: SVGProps) {
   return (
     <svg
       {...props}
@@ -161,7 +154,7 @@ function TrashIcon (props: SVGProps) {
   )
 }
 
-function XIcon (props: SVGProps) {
+function XIcon(props: SVGProps) {
   return (
     <svg
       {...props}
