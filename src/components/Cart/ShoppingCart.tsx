@@ -1,28 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useCartStore from '../../stores/CartStore'
+import MinusIcon from '../Icons/MinusIcon'
+import PlusIcon from '../Icons/PlusIcon'
+import XIcon from '../Icons/XIcon'
 
 type SVGProps = React.SVGProps<SVGSVGElement>
 
-export default function ShoppingCart() {
+export default function ShoppingCart () {
+  const { cart, isCartOpen, setIsCartOpen, clearCart, handleDecrement, handleIncrement, total, handleRemove } = useCartStore()
+  const [cookies, setCookies] = useState()
 
-  const { cart, isCartOpen, setIsCartOpen, setCart, clearCart } = useCartStore();
-
-  const handleIncrement = (id: any) => {
-    setCart(cart.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item)))
-  }
-  const handleDecrement = (id: any) => {
-    setCart(cart.map((item) => (item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item)))
-  }
-  const handleRemove = (id: any) => {
-    setCart(cart.filter((item) => item.id !== id))
-  }
-  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  useEffect(() => {}, [cart])
 
   return (
     <>
-      <div className={`fixed ${isCartOpen ? '' : 'hidden'} z-50 min-h-dvh w-screen bg-black/30`}>
+      <div className={`fixed group ${isCartOpen ? '' : 'hidden'} z-50 min-h-dvh w-screen bg-black/30`}>
         {isCartOpen && (
-          <div className='absolute min-h-dvh right-0 max-h-[700px] z-40 mt-2 w-full sm:w-[450px] rounded-s-lg border bg-white shadow-lg'>
+          <div className='absolute min-h-dvh right-0 max-h-[700px]
+          animate-fade-left animate-duration-300
+           z-40 mt-2 w-full sm:w-[450px] rounded-s-lg border bg-white shadow-lg'
+          >
             <div className='flex flex-col gap-4 p-4'>
               <div className='flex items-center justify-between'>
                 <h3 className='text-lg font-medium'>Shopping Cart</h3>
@@ -75,46 +72,7 @@ export default function ShoppingCart() {
   )
 }
 
-function MinusIcon(props: SVGProps) {
-  return (
-    <svg
-      {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path d='M5 12h14' />
-    </svg>
-  )
-}
-
-function PlusIcon(props: SVGProps) {
-  return (
-    <svg
-      {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path d='M5 12h14' />
-      <path d='M12 5v14' />
-    </svg>
-  )
-}
-
-export function ShoppingCartIcon(props: SVGProps) {
+export function ShoppingCartIcon (props: SVGProps) {
   return (
     <svg
       {...props}
@@ -133,7 +91,7 @@ export function ShoppingCartIcon(props: SVGProps) {
   )
 }
 
-function TrashIcon(props: SVGProps) {
+export function TrashIcon (props: SVGProps) {
   return (
     <svg
       {...props}
@@ -150,26 +108,6 @@ function TrashIcon(props: SVGProps) {
       <path d='M3 6h18' />
       <path d='M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6' />
       <path d='M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2' />
-    </svg>
-  )
-}
-
-function XIcon(props: SVGProps) {
-  return (
-    <svg
-      {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path d='M18 6 6 18' />
-      <path d='m6 6 12 12' />
     </svg>
   )
 }
