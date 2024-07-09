@@ -83,7 +83,7 @@ function LoginForm () {
           <label htmlFor='terms' className='font-light text-gray-700'>
             I accept the
             <a
-              className='font-medium text-primary-600 hover:underline dark:text-primary-500'
+              className='font-medium text-primary-600 hover:underline dark:text-primary-500 ml-1'
               href='#'
             >
               Terms and Conditions
