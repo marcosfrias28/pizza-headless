@@ -1,6 +1,6 @@
 ---
+import { PizzaMenu } from "../components/Menu/Menu";
 import Layout from "../layouts/Layout.astro";
-import {HomeMenu} from "../components/HomeMenu.tsx";
 ---
 
 <Layout title="Pizza Headless">
@@ -45,8 +45,8 @@ import {HomeMenu} from "../components/HomeMenu.tsx";
 				class="absolute bg-[url(/herobg.svg)] -z-10 bg-auto bg-no-repeat bg-center -top-5 h-[557px] w-full"
 			>
 			</div>
-			<div transition:name="hero-cards" class=" min-h-96">
-				<HomeMenu client:load />
+			<div transition:name="hero-cards" class="min-h-96">
+				<PizzaMenu client:load />
 			</div>
 		</section>
 		<section

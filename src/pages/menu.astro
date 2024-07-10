@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SearchFormPizza from "../components/SearchPizza/SearchPizza.tsx";
-import MenuItems from "../components/MenuItems.tsx";
+import { PizzaMenu } from "../components/Menu/Menu";
 ---
 
 <Layout title="Pizza Headless.">
@@ -48,7 +48,7 @@ import MenuItems from "../components/MenuItems.tsx";
       >
       </div>
       <div transition:name="hero-cards" class="min-h-96">
-        <MenuItems client:load />
+        <PizzaMenu limit={5} client:load />
       </div>
     </section>
   </main>
