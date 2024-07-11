@@ -3,14 +3,12 @@ import useCartStore from '../../stores/CartStore'
 import MinusIcon from '../Icons/MinusIcon'
 import PlusIcon from '../Icons/PlusIcon'
 import XIcon from '../Icons/XIcon'
+import axios from 'axios'
 
 type SVGProps = React.SVGProps<SVGSVGElement>
 
 export default function ShoppingCart () {
   const { cart, isCartOpen, setIsCartOpen, clearCart, handleDecrement, handleIncrement, total, handleRemove } = useCartStore()
-  const [cookies, setCookies] = useState()
-
-  useEffect(() => {}, [cart])
 
   return (
     <>
@@ -71,6 +69,9 @@ export default function ShoppingCart () {
 
   )
 }
+
+
+
 
 export function ShoppingCartIcon (props: SVGProps) {
   return (

@@ -23,7 +23,7 @@ function Menu({ limit }: { limit: number }) {
   const { cart, setCart, handleDecrement, handleIncrement, handleRemove } = useCartStore()
 
 
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
+  const { data, isLoading, fetchNextPage, isError } = useInfiniteQuery({
     queryKey: ['pizzas'],
     queryFn: async ({ pageParam }) => {
       return await axios.get(
@@ -55,11 +55,17 @@ function Menu({ limit }: { limit: number }) {
         {isLoading && [...Array(limit)].map((_, i) => (
           <LoadingArticle key={i + 10} />
         ))}
+        {isError && [...Array(limit)].map((_, i) => (
+          <>
+            <LoadingArticle key={i + 10} />
+          </>
+
+        ))}
         {pizzas &&
           pizzas.map(({ id, cover, name, price }: Pizza, index) => {
             const ItemOnCart = cart.find((item) => item.id === id)
 
-            if (limit === 4 && index === 4) return null
+            if (limit === 4 && index > 3) return null
 
             return (
               <article

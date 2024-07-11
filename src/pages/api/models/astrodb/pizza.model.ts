@@ -1,7 +1,7 @@
 import type { Pizza as PizzaType } from '../../../../types/PizzaType'
 import { db, eq, Pizza, count, Ingredient, PizzaIngredient } from 'astro:db'
 
-interface id { id: string }
+type id = `${string}-${string}-${string}-${string}-${string}`
 
 interface PizzaParams {
   name: string | undefined
@@ -11,7 +11,8 @@ interface PizzaParams {
 }
 
 export class PizzaModel {
-  static async getAllPizzas ({ page, perPage, name, ingredients }: PizzaParams) {
+  static async getAllPizzas({ page, perPage, name, ingredients }: PizzaParams) {
+
     let limit = 12
     let offset = 0
 
@@ -54,15 +55,14 @@ export class PizzaModel {
     }
   }
 
-  static async getAllNames () {
+  static async getAllNames() {
     const allNames = await db.select({ name: Pizza.name }).from(Pizza)
     return allNames
   }
 
-  static async getById ({ id }: id) {
+  static async getById({ id }: { id: id }) {
     try {
       const pizzaById = await db.select().from(Pizza).where(eq(Pizza.id, id))
-      console.log(pizzaById)
       if (pizzaById.length === 0) return { error: 'Pizza not found' }
       return pizzaById[0]
     } catch {
@@ -70,63 +70,60 @@ export class PizzaModel {
     }
   }
 
-  static async create ({ name, price, cover, ingredients }: PizzaType) {
-    const id = crypto.randomUUID()
+  static async create({ name, price, cover, ingredients }: PizzaType) {
+
+    /*
+      SOME LOGIC TO ADD PIZZA, INGREDIENTS AND PIZZAINGREDIENTS TO ASTRODB,
+      AstroDB uses a SQL-like syntax to interact with the database, especificly Drizzle Query Language (DQL).
+
+      To interact with the database, we use the db object imported from 'astro:db'
+    */
+
+
+    let pizza_id: id;
     try {
-      const result = await db.select({
-        name: Pizza.name
-      }).from(Pizza).where(eq(Pizza.name, name))
-      if (result.length > 0) return { error: 'Pizza already exists' }
+      //try to select pizza by name
+      const result = await db.select({ id: Pizza.id }).from(Pizza).where(eq(Pizza.name, name))
+
+      /// Check if pizza has already been added
+      if (result[0]) return { error: 'Pizza already exists' }
+
+      //Generate new id
+      pizza_id = crypto.randomUUID()
+
+      //Add pizza if it doesn't exist
       await db.insert(Pizza)
         .values({
-          id,
+          id: pizza_id,
           name,
           price,
           cover
         })
-    } catch (error) {
-      return { error: 'There was an error adding this pizza, try with another name.', errorSQL: error }
+    } catch {
+      return { error: 'Pizza not added' }
     }
-    try {
-      console.log('Entered')
-      ingredients.forEach(async (ingredient) => {
-        const result = await db
-          .select({ id: Ingredient.id })
-          .from(Ingredient)
-          .where(eq(Ingredient.name, ingredient))
-        console.log(result)
-        if (result.length > 0) {
-          const ingredient_id = result[0]?.id
-          console.log(ingredient_id)
-          await db.insert(PizzaIngredient).values({
-            pizza_id: id,
-            ingredient_id
-          })
-        } else {
-          console.log('Entered else')
-          const result = await db.insert(Ingredient).values({
-            id: crypto.randomUUID(),
-            name: ingredient
-          })
-          console.log(result)
+    ingredients.map(async (ingredient: string) => {
+      try {
+        await db.insert(Ingredient).values({
+          name: ingredient
+        }).onConflictDoNothing()
 
-          const ingredient_id = result.lastInsertRowid
-          console.log(ingredient_id)
-          await db.insert(PizzaIngredient).values({
-            pizza_id: id as string,
-            ingredient_id: ingredient_id as unknown as string
-          })
-        }
-      })
-    } catch (error) {
-      return { error: 'Something went wrong handling the ingredients' }
-    }
+        const [{ id: ingredient_id }] = await db.select({ id: Ingredient.id }).from(Ingredient).where(eq(Ingredient.name, ingredient))
+
+        await db.insert(PizzaIngredient).values({
+          pizza_id,
+          ingredient_id
+        })
+      } catch {
+        return { error: 'Ingredient not added' }
+      }
+    })
     return {
-      success: 'Pizza, Ingredients, and PizzaIngredients created successfully'
+      success: 'Pizza, Ingredients, and PizzaIngredients added successfully'
     }
   }
 
-  static async delete ({ id }: id) {
+  static async delete({ id }: { id: id }) {
     try {
       await db.delete(Pizza).where(eq(Pizza.id, id))
       return { success: 'Pizza deleted' }
@@ -135,8 +132,8 @@ export class PizzaModel {
     }
   }
 
-  static async update ({ id, input }: { id: id, input: any }) {
-    console.log(id, input, 'Working on progress') // TODO: Update the pizza
+  static async update({ id, input }: { id: id, input: any }) {
+    console.log(id, input, 'Working on progress')
     return { success: 'Pizza updated' }
   }
 }
