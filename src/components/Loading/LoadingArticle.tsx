@@ -1,4 +1,4 @@
-function LoadingArticle () {
+function LoadingArticle ({error} : {error?: string}) {
   return (
     <article className='relative flex flex-col animate-pulse w-[315px] h-[332px] bg-white rounded-xl backdrop-blur-lg shadow-black/25 shadow-lg overflow-hidden pb-7'>
       <div className='h-1/2  flex-grow bg-slate-200' />
