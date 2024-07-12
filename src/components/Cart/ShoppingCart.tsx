@@ -34,10 +34,10 @@ export default function ShoppingCart () {
               <div className='flex flex-col gap-4 max-h-[600px] overflow-y-scroll px-5'>
                 {cart.map((item) => (<div key={item.id} className='flex items-center justify-between gap-4'>
                   <div className='flex items-center gap-4'>
-                    <img src='/placeholder.svg' alt={item.name} width={64} height={64} className='rounded-md' />
+                    <img src={item.cover} alt={item.name} width={64} height={64} className='rounded-md' />
                     <div>
                       <h4 className='font-medium'>{item.name}</h4>
-                      <p className='text-sm text-muted-foreground'>${item.price.toFixed(2)}</p>
+                      <p className='text-sm text-muted-foreground'>{item.price.toFixed(2)} €</p>
                     </div>
                   </div>
                   <div className='flex items-center gap-2'>
@@ -58,9 +58,11 @@ export default function ShoppingCart () {
               <hr />
               <div className='flex items-center justify-between'>
                 <p className='text-lg font-medium'>Total:</p>
-                <p className='text-lg font-medium'>${total.toFixed(2)}</p>
+                <p className='text-lg font-medium'>{total.toFixed(2)} €</p>
               </div>
+              <form action="/api/checkout/checkout-session" method='post'>
               <button className='w-full bg-bright-sun-300 py-2 rounded-lg shadow-xl '>Proceed to Checkout</button>
+              </form>
             </div>
           </div>
         )}

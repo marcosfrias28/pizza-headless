@@ -14,13 +14,14 @@ const Pizza = defineTable({
     id: column.text({ primaryKey: true, unique: true, nullable: false }),
     name: column.text(),
     price: column.number(),
-    cover: column.text()
+    stripe_price: column.text({default: 'price_1PbgQbBMqLLzMYdCKJZSgubM'}),
+    cover: column.text(),
   }
 })
 
 const Ingredient = defineTable({
   columns: {
-    id: column.text({ primaryKey: true, unique: true, nullable: false }),
+    id: column.number({ primaryKey: true, unique: true, nullable: false }),
     name: column.text({ unique: true, nullable: false })
   }
 })
@@ -28,7 +29,7 @@ const Ingredient = defineTable({
 const PizzaIngredient = defineTable({
   columns: {
     pizza_id: column.text({ references: () => Pizza.columns.id }),
-    ingredient_id: column.text({ references: () => Ingredient.columns.id })
+    ingredient_id: column.number({ references: () => Ingredient.columns.id })
   }
 })
 

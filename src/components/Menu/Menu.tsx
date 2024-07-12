@@ -62,7 +62,7 @@ function Menu({ limit }: { limit: number }) {
 
         ))}
         {pizzas &&
-          pizzas.map(({ id, cover, name, price }: Pizza, index) => {
+          pizzas.map(({ id, cover, name, price, ingredients }: Pizza, index) => {
             const ItemOnCart = cart.find((item) => item.id === id)
 
             if (limit === 4 && index > 3) return null
@@ -76,8 +76,8 @@ function Menu({ limit }: { limit: number }) {
                 <div className='h-1/2 relative -top-1/2' >
                   <img src={cover} alt='Immagine del prodotto in questione' />
                 </div>
-                <div className='mx-8 mb-10'>
-                  <div className='flex flex-row justify-between gap-10'>
+                <div className='mx-4 mb-7'>
+                  <div className='flex flex-row flex-nowrap justify-between gap-10'>
                     <>
                       <span className='text-black font-semibold'>
                         {name}
@@ -87,8 +87,10 @@ function Menu({ limit }: { limit: number }) {
                       </span>
                     </>
                   </div>
-                  <div className='text-gray-500 w-full max-w-[300px] text-pretty text-ellipsis overflow-hidden text-xs'>
-                    {id}
+                  <div className='text-gray-500 w-full'>
+                    <p className='flex flex-wrap max-h-7 h-full gap-2 text-ellipsis text-pretty text-xs'>
+                      <span >{ingredients.join(', ')}</span>
+                    </p>
                   </div>
                 </div>
                 {
@@ -105,7 +107,6 @@ function Menu({ limit }: { limit: number }) {
                       <Button variation='center' className='w-18 px-7'>
                         {ItemOnCart?.quantity}
                       </Button>
-
                       <Button variation='right' onClick={() => handleIncrement(id)}>
                         <PlusIcon strokeWidth={5} className='h-5 w-5' />
                       </Button>
@@ -114,7 +115,7 @@ function Menu({ limit }: { limit: number }) {
                 } {
                   (ItemOnCart == null) && (<button
                     onClick={() => {
-                      handleAddCartItem({ id, name, price, quantity: 1 })
+                      handleAddCartItem({ id, name, price, quantity: 1, cover })
                     }} className='text-center rounded-lg px-7 py-3 mx-10 bg-bright-sun-400 text-white justify-self-end font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer'
                   >
                     <span>Add to order</span>

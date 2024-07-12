@@ -10,5 +10,6 @@ config()
 export default defineConfig({
   integrations: [tailwind(), react(), db()],
   output: 'server',
-  adapter: vercel()
+  adapter: vercel(),
+  site: 'https://pizza-headless.vercel.app'
 })

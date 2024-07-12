@@ -11,7 +11,13 @@ interface PizzaParams {
 }
 
 export class PizzaModel {
-  static async getAllPizzas({ page, perPage, name, ingredients }: PizzaParams) {
+
+  static async getAllIngredients() {
+    const ingredients = await db.select().from(Ingredient)
+    return ingredients
+  }
+
+  static async getAllPizzas({ page, perPage, name: nameFilter, ingredients: ingredientsFilter }: PizzaParams) {
 
     let limit = 12
     let offset = 0
@@ -27,26 +33,38 @@ export class PizzaModel {
     const totalPages = Math.ceil(totalResults / (perPage || limit))
     if (page < totalPages) {
       try {
-        const pizza = await db.select({
-          id: Pizza.id,
-          name: Pizza.name,
-          price: Pizza.price,
-          cover: Pizza.cover
-        }).from(Pizza).orderBy(Pizza.name).limit(limit).offset(offset)
+        const dbIngredients = await db.select().from(Ingredient)
+        const pizzaIngredients = await db.select().from(PizzaIngredient)
+        const dbPizzas = await db.select().from(Pizza).orderBy(Pizza.name).limit(limit).offset(offset) as PizzaType[]
 
-        if (name) {
-          const pizzaName = pizza.filter((p: any) =>
-            p.name.toLowerCase().includes(name.toLowerCase())
+        const pizzas = dbPizzas.map((pizza) => {
+          const matchIngredientsByPizzaId = pizzaIngredients.filter(pizzaIngredient => pizza.id === pizzaIngredient.pizza_id)
+          const ingredientNames = matchIngredientsByPizzaId.map(ingredient => {
+            const result = dbIngredients.find(dbIngredient => dbIngredient.id === ingredient.ingredient_id)
+            return result?.name
+          })
+          return {...pizza, ingredients: ingredientNames}
+        }) as PizzaType[]
+
+        if (nameFilter) {
+          console.log(nameFilter);
+          
+          const pizzaName = pizzas.filter((p: any) =>
+            p.name.toLowerCase().includes(nameFilter.toLowerCase())
           )
           return pizzaName
         }
-        if (ingredients) {
-          const pizzaIngredients = pizza.filter((p: any) =>
-            p.ingredients.toLowerCase().includes(ingredients.toLowerCase())
-          )
+        if (ingredientsFilter) {
+          console.log(ingredientsFilter);
+          
+          const pizzaIngredients = pizzas.filter((p: PizzaType) => {
+            const result = p.ingredients.find(i => i.toLowerCase().includes(ingredientsFilter.toLowerCase()))
+            if (result) return true
+            return
+          })
           return pizzaIngredients
         }
-        return pizza
+        return pizzas
       } catch {
         return { error: 'Something went wrong getting the pizzas' }
       }

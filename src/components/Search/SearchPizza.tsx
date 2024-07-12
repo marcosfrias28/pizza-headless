@@ -1,17 +1,17 @@
+import axios from 'axios';
 import { useEffect, useState, type SetStateAction } from 'react'
-import { ingredients } from '../../utlis/ingredients'
+import type { string } from 'zod';
+import type { Pizza } from '../../types/PizzaType';
 
 function SearchFormPizza () {
   const [filter, setFilter] = useState(null)
   // const [name, setName] = useState('Name')
-  const [nameList] = useState(undefined as any)
+  const [nameList, setNameList] = useState<string[]>([]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
 
   useEffect(() => {
-    // fetch('https://pizza-api.up.railway.app/pizza/names')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         setNameList(data.map((n: any) => n.name));
-    //     })
+    axios.get('api/pizza/ingredients').then(res => setIngredients(res.data?.map((i : {id: string, name: string}) => i.name)));
+    axios.get('api/pizza?perPage=50').then(res => setNameList(res.data?.map((p : Pizza) => p.name)));
   }, [])
 
   function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
@@ -31,7 +31,7 @@ function SearchFormPizza () {
       />
       <datalist id='pizza-ingredients'>
         {
-                    ingredients.map((ingredient: string) => (
+                   ingredients[0] && ingredients.map((ingredient: string) => (
                       <option key={ingredient}>{ingredient}</option>
                     ))
                 }
