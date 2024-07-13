@@ -1,7 +1,7 @@
 import type { Pizza as PizzaType } from '../../../../types/PizzaType'
 import { db, eq, Pizza, count, Ingredient, PizzaIngredient } from 'astro:db'
 
-type id = `${string}-${string}-${string}-${string}-${string}`
+export type id = `${string}-${string}-${string}-${string}-${string}` | undefined
 
 interface PizzaParams {
   name: string | undefined
@@ -35,7 +35,7 @@ export class PizzaModel {
       try {
         const dbIngredients = await db.select().from(Ingredient)
         const pizzaIngredients = await db.select().from(PizzaIngredient)
-        const dbPizzas = await db.select().from(Pizza).orderBy(Pizza.name).limit(limit).offset(offset) as PizzaType[]
+        const dbPizzas = await db.select().from(Pizza).orderBy(Pizza.name).limit(limit).offset(offset)
 
         const pizzas = dbPizzas.map((pizza) => {
           const matchIngredientsByPizzaId = pizzaIngredients.filter(pizzaIngredient => pizza.id === pizzaIngredient.pizza_id)
@@ -43,12 +43,12 @@ export class PizzaModel {
             const result = dbIngredients.find(dbIngredient => dbIngredient.id === ingredient.ingredient_id)
             return result?.name
           })
-          return {...pizza, ingredients: ingredientNames}
+          return { ...pizza, ingredients: ingredientNames }
         }) as PizzaType[]
 
         if (nameFilter) {
           console.log(nameFilter);
-          
+
           const pizzaName = pizzas.filter((p: any) =>
             p.name.toLowerCase().includes(nameFilter.toLowerCase())
           )
@@ -56,7 +56,7 @@ export class PizzaModel {
         }
         if (ingredientsFilter) {
           console.log(ingredientsFilter);
-          
+
           const pizzaIngredients = pizzas.filter((p: PizzaType) => {
             const result = p.ingredients.find(i => i.toLowerCase().includes(ingredientsFilter.toLowerCase()))
             if (result) return true
@@ -78,7 +78,8 @@ export class PizzaModel {
     return allNames
   }
 
-  static async getById({ id }: { id: id }) {
+  static async getById(id : id) {
+    if (!id) return { error: 'ID must be provided' }
     try {
       const pizzaById = await db.select().from(Pizza).where(eq(Pizza.id, id))
       if (pizzaById.length === 0) return { error: 'Pizza not found' }
@@ -141,7 +142,8 @@ export class PizzaModel {
     }
   }
 
-  static async delete({ id }: { id: id }) {
+  static async delete(id : id) {
+    if (!id) return { error: 'ID must be provided' }
     try {
       await db.delete(Pizza).where(eq(Pizza.id, id))
       return { success: 'Pizza deleted' }

@@ -1,8 +1,8 @@
 ---
 import jwt from "jsonwebtoken";
 import { Toaster } from "sonner";
-import LogoutButton from '../Logout/LogoutButton'
-import CartButton from '../Cart/CartButton'
+import LogoutButton from "../Logout/LogoutButton";
+import CartButton from "../Cart/CartButton";
 
 export interface User {
     id: string;
@@ -23,7 +23,6 @@ if (token) {
 }
 
 user = payload?.user;
-
 ---
 
 <header class="bg-white w-full">
@@ -69,12 +68,17 @@ user = payload?.user;
             }
             {
                 user && (
-                    <div class="flex flex-nowrap gap-4 items-center">
-                        <a href="/protected">Welcome Back {user.name}</a>
-                        {
-                            <LogoutButton client:load />
-                        }
-                    </div>
+                    <>
+                        <div class="flex flex-nowrap gap-1 items-center">
+                            <span>Welcome Back,</span>
+                            <span>
+                                <a href="/protected">
+                                    <strong>{user.name}</strong>
+                                </a>
+                            </span>
+                        </div>
+                        <LogoutButton client:load />
+                    </>
                 )
             }
             <CartButton client:load />
@@ -82,4 +86,4 @@ user = payload?.user;
     </nav>
 </header>
 
-<Toaster client:load richColors position={"top-center"}/>
+<Toaster client:load richColors position={"top-center"} />
