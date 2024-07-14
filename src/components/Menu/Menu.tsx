@@ -1,5 +1,4 @@
-import axios from 'axios'
-import useCartStore, { type Item } from '../../stores/CartStore.js'
+import { type Item } from '../../stores/CartStore.js'
 import MinusIcon from '../Icons/MinusIcon.jsx'
 import PlusIcon from '../Icons/PlusIcon.jsx'
 import { TrashIcon } from '../Cart/ShoppingCart.jsx'
@@ -9,6 +8,7 @@ import type { Pizza } from '../../types/PizzaType.js'
 import { useEffect } from 'react'
 import { useGetPizzaData } from '../../hooks/useGetPizzaData'
 import { useMenuStore } from '../../hooks/useMenuStore'
+import useCartStore from '../../hooks/useCartStore.js'
 
 const queryClient = new QueryClient()
 export function PizzaMenu({ limit = 4 }) {
@@ -50,7 +50,7 @@ function Menu({ limit }: { limit: number }) {
 
         {pizzas &&
           pizzas.map(({ id, cover, name, price, ingredients }: Pizza, index) => {
-            const ItemOnCart = cart.find((item) => item.id === id)
+            const ItemOnCart = cart.find((item : Item) => item.id === id)
 
             if (limit === 4 && index > 3) return null
 
