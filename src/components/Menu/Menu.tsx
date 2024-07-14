@@ -11,20 +11,21 @@ import { useMenuStore } from '../../hooks/useMenuStore'
 import useCartStore from '../../hooks/useCartStore.js'
 
 const queryClient = new QueryClient()
-export function PizzaMenu({ limit = 4 }) {
+
+export function PizzaMenu({home} : {home : boolean}) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Menu limit={limit} />
+      <Menu home={home} />
     </QueryClientProvider>
   )
 }
 
 
-function Menu({ limit }: { limit: number }) {
+function Menu({ home } : { home : boolean }) {
 
   const { cart, setCart, handleDecrement, handleIncrement, handleRemove } = useCartStore()
   const { filter, name } = useMenuStore()
-  const { pizzas, isLoading, fetchNextPage, refetch } = useGetPizzaData(limit)
+  const { pizzas, isLoading, fetchNextPage, refetch } = useGetPizzaData()
 
   useEffect(() => {
     refetch()
@@ -44,7 +45,7 @@ function Menu({ limit }: { limit: number }) {
         id='cards'
         className='w-full min-h-72 gap-6 mx-auto my-14 flex flex-col md:flex-row flex-wrap justify-center items-center max-w-screen-2xl'
       >
-        {isLoading && !pizzas && [...Array(limit)].map((_, i) => (
+        {isLoading && !pizzas && [...Array(home ? 4 : 12)].map((_, i) => (
           <LoadingArticle key={i + 10} />
         ))}
 
@@ -52,7 +53,7 @@ function Menu({ limit }: { limit: number }) {
           pizzas.map(({ id, cover, name, price, ingredients }: Pizza, index) => {
             const ItemOnCart = cart.find((item : Item) => item.id === id)
 
-            if (limit === 4 && index > 3) return null
+            if (index > 3 && home) return null
 
             return (
               <article
@@ -114,7 +115,7 @@ function Menu({ limit }: { limit: number }) {
           })}
       </section>
       <div className='w-screen flex items-center justify-center py-20'>
-        <button onClick={async () => await fetchNextPage()} className={`${limit <= 4 ? 'hidden' : ''} absolute mx-auto flex justify-center items-center gap-2 rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>Load More</button>
+        <button onClick={async () => await fetchNextPage()} className={`${home ? 'hidden' : ''} absolute mx-auto flex justify-center items-center gap-2 rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>Load More</button>
       </div>
     </>
   )
