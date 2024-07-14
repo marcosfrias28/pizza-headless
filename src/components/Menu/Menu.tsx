@@ -4,12 +4,13 @@ import MinusIcon from '../Icons/MinusIcon.jsx'
 import PlusIcon from '../Icons/PlusIcon.jsx'
 import { TrashIcon } from '../Cart/ShoppingCart.jsx'
 import LoadingArticle from '../Loading/LoadingArticle.jsx'
-import { QueryClientProvider, QueryClient, useInfiniteQuery } from '@tanstack/react-query'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import type { Pizza } from '../../types/PizzaType.js'
+import { useEffect } from 'react'
+import { useGetPizzaData } from '../../hooks/useGetPizzaData'
+import { useMenuStore } from '../../hooks/useMenuStore'
 
 const queryClient = new QueryClient()
-
-
 export function PizzaMenu({ limit = 4 }) {
   return (
     <QueryClientProvider client={queryClient}>
@@ -18,25 +19,16 @@ export function PizzaMenu({ limit = 4 }) {
   )
 }
 
+
 function Menu({ limit }: { limit: number }) {
 
   const { cart, setCart, handleDecrement, handleIncrement, handleRemove } = useCartStore()
+  const { filter, name } = useMenuStore()
+  const { pizzas, isLoading, fetchNextPage, refetch } = useGetPizzaData(limit)
 
-
-  const { data, isLoading, fetchNextPage, isError } = useInfiniteQuery({
-    queryKey: ['pizzas'],
-    queryFn: async ({ pageParam }) => {
-      return await axios.get(
-        `/api/pizza?page=${pageParam}&perPage=${limit}`
-      ).then(res => res.data)
-    },
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length ? allPages.length : undefined
-    }
-  })
-
-  const pizzas = data?.pages.flat(Infinity)
+  useEffect(() => {
+    refetch()
+  }, [filter, name])
 
   function handleAddCartItem(item: Item) {
     setCart([...cart, item])
@@ -52,15 +44,10 @@ function Menu({ limit }: { limit: number }) {
         id='cards'
         className='w-full min-h-72 gap-6 mx-auto my-14 flex flex-col md:flex-row flex-wrap justify-center items-center max-w-screen-2xl'
       >
-        {isLoading && [...Array(limit)].map((_, i) => (
+        {isLoading && !pizzas && [...Array(limit)].map((_, i) => (
           <LoadingArticle key={i + 10} />
         ))}
-        {isError && [...Array(limit)].map((_, i) => (
-          <>
-            <LoadingArticle key={i + 10} />
-          </>
 
-        ))}
         {pizzas &&
           pizzas.map(({ id, cover, name, price, ingredients }: Pizza, index) => {
             const ItemOnCart = cart.find((item) => item.id === id)

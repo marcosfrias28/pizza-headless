@@ -1,0 +1,13 @@
+---
+interface Props {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+    href="/menu"
+    class={`rounded-lg flex items-center gap-2 w-fit px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer ${className} `}
+    >Check the menu <span><img src="/rightarrow.svg" alt="" /></span>
+</a>

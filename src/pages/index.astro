@@ -1,9 +1,11 @@
 ---
+import MenuButton from "../components/Buttons/MenuButton.astro";
+import Footer from "../components/Footer/Footer.astro";
 import { PizzaMenu } from "../components/Menu/Menu";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Pizza Headless">
+<Layout title="Home">
 	<main class="w-full relative">
 		<section
 			id="hero-section"
@@ -22,13 +24,9 @@ import Layout from "../layouts/Layout.astro";
 					Morbi eu cursus nisi. Nunc consectetur ipsum pharetra,
 					congue odio quis, porttitor ligula. Vestibulum viverra.
 				</p>
-				<a
-					href="/menu"
-					class="rounded-lg block w-fit px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-					>Check the menu</a
-				>
+				<MenuButton />
 			</div>
-			<picture class="max-w-lg self-start">
+			<picture class="max-w-lg self-start -z-[999]">
 				<img
 					transition:name="margherita"
 					src="/margherita.webp"
@@ -53,6 +51,7 @@ import Layout from "../layouts/Layout.astro";
 			class="w-full max-w-max flex xl:flex-row flex-col flex-nowrap gap-5 mx-auto mt-32"
 		>
 			<div
+				transition:name="ourRestaurant-image"
 				class="relative min-w-96 min-h-96 w-3/4 max-w-xl h-[566px] flex justify-center items-center self-center"
 			>
 				<img src="/image-3.webp" class="object-cover" />
@@ -81,277 +80,165 @@ import Layout from "../layouts/Layout.astro";
 					euismod dapibus nulla. Maecenas pharetra nisl nec justo
 					malesuada auctor.
 				</p>
-				<button
+				<a
+					href="/about"
 					class="w-[253px] h-[43px] mt-10 md:mt-0 text-base font-semibold text-white rounded-[5px] bg-[#e1b000] px-6 py-3"
 				>
 					Discover our restaurant
-				</button>
+				</a>
 			</article>
-		</section>
-		<section
-			class="w-full max-w-max flex flex-row flex-wrap gap-10 xl:gap-5 mx-auto mt-32 place-content-center text-center"
-		>
-			<article
-				class="flex flex-col flex-nowrap justify-center items-center w-full mb-14"
-			>
-				<h3 class="font-bold text-[30px] text-[#be9400]">Blog</h3>
-				<span class="font-medium text-[16px] leading-[30px] text-black"
-					>Discover our blog and learn more about Artisan Pizzeria
-					Restaurant</span
-				>
-			</article>
-			<div class="w-[427px] h-[589px] bg-[#fff5d3] px-8 py-5">
-				<div
-					class="px-3 py-1 mx-auto w-fit relative -top-9 bg-[#efc50e] flex justify-center items-center"
-				>
-					<span class="text-base font-semibold text-black text-nowrap"
-						>Category</span
-					>
-				</div>
-				<picture class="">
-					<div
-						class="w-[359px] h-[222px] bg-[#efc50e] absolute -rotate-6"
-					>
-					</div>
-					<img
-						src="/image-3.webp"
-						class="w-[359px] h-[222px] object-cover relative z-10"
-					/>
-				</picture>
-				<div>
-					<h3
-						class="w-[363px] h-[46px] text-lg font-semibold text-left text-black my-8"
-					>
-						Lorem ipsum dolor sit amen et lorem ipsum dolor sit amen
-						et
-					</h3>
-					<p class="text-base text-left text-[#585858]">
-						<span
-							class="text-base font-medium text-left text-[#585858]"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Morbi eu cursus nisi. Nunc consectetur ipsum
-							pharetra, congue odio quis, porttitor ligula.
-						</span><span
-							class="text-base font-bold text-left text-[#585858]"
-							>Read More...</span
-						>
-					</p>
-					<div
-						class="flex flex-row flex-nowrap justify-between mt-20"
-					>
-						<span class="text-sm italic text-left text-[#585858]">
-							Nome Cognome
-						</span>
-						<span class="text-sm italic text-left text-[#585858]">
-							25/05/2024
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="w-[427px] h-[589px] bg-[#fff5d3] px-8 py-5">
-				<div
-					class="px-3 py-1 mx-auto w-fit relative -top-9 bg-[#efc50e] flex justify-center items-center"
-				>
-					<span class="text-base font-semibold text-black text-nowrap"
-						>Category</span
-					>
-				</div>
-				<picture class="">
-					<div
-						class="w-[359px] h-[222px] bg-[#efc50e] absolute -rotate-6"
-					>
-					</div>
-					<img
-						src="/image-3.webp"
-						class="w-[359px] h-[222px] object-cover relative z-10"
-					/>
-				</picture>
-				<div>
-					<h3
-						class="w-[363px] h-[46px] text-lg font-semibold text-left text-black my-8"
-					>
-						Lorem ipsum dolor sit amen et lorem ipsum dolor sit amen
-						et
-					</h3>
-					<p class="text-base text-left text-[#585858]">
-						<span
-							class="text-base font-medium text-left text-[#585858]"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Morbi eu cursus nisi. Nunc consectetur ipsum
-							pharetra, congue odio quis, porttitor ligula.
-						</span><span
-							class="text-base font-bold text-left text-[#585858]"
-							>Read More...</span
-						>
-					</p>
-					<div
-						class="flex flex-row flex-nowrap justify-between mt-20"
-					>
-						<span class="text-sm italic text-left text-[#585858]">
-							Nome Cognome
-						</span>
-						<span class="text-sm italic text-left text-[#585858]">
-							25/05/2024
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="w-[427px] h-[589px] bg-[#fff5d3] px-8 py-5">
-				<div
-					class="px-3 py-1 mx-auto w-fit relative -top-9 bg-[#efc50e] flex justify-center items-center"
-				>
-					<span class="text-base font-semibold text-black text-nowrap"
-						>Category</span
-					>
-				</div>
-				<picture class="">
-					<div
-						class="w-[359px] h-[222px] bg-[#efc50e] absolute -rotate-6"
-					>
-					</div>
-					<img
-						src="/image-3.webp"
-						class="w-[359px] h-[222px] object-cover relative z-10"
-					/>
-				</picture>
-				<div>
-					<h3
-						class="w-[363px] h-[46px] text-lg font-semibold text-left text-black my-8"
-					>
-						Lorem ipsum dolor sit amen et lorem ipsum dolor sit amen
-						et
-					</h3>
-					<p class="text-base text-left text-[#585858]">
-						<span
-							class="text-base font-medium text-left text-[#585858]"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Morbi eu cursus nisi. Nunc consectetur ipsum
-							pharetra, congue odio quis, porttitor ligula.
-						</span><span
-							class="text-base font-bold text-left text-[#585858]"
-							>Read More...</span
-						>
-					</p>
-					<div
-						class="flex flex-row flex-nowrap justify-between mt-20"
-					>
-						<span class="text-sm italic text-left text-[#585858]">
-							Nome Cognome
-						</span>
-						<span class="text-sm italic text-left text-[#585858]">
-							25/05/2024
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="w-full flex place-content-center text-white mt-10">
-				<button
-					class="w-[198px] self-center h-[43px] rounded-[5px] bg-[#e1b000] hover:scale-105 transition-all"
-					>Read More</button
-				>
-			</div>
 		</section>
 	</main>
-	<footer class="mt-20">
-		<svg
-			class="w-full h-[115px]"
-			viewBox="0 0 1919 115"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			preserveAspectRatio="none"
+	<section
+		class="w-full max-w-max flex flex-row flex-wrap gap-10 xl:gap-5 mx-auto mt-32 place-content-center text-center"
+	>
+		<article
+			class="flex flex-col flex-nowrap justify-center items-center w-full mb-14"
 		>
-			<g clip-path="url(#clip0_2_279)">
-				<path
-					opacity="0.25"
-					d="M1919 115L1919 70.6388C1842.54 49.3638 1753.26 39.8092 1666.2 43.8055C1553.62 48.9517 1448.07 75.7276 1335.32 79.743C1217.18 83.9214 1099.26 63.5664 986.2 45.9522C875.368 28.7022 764.92 22.1088 651.16 33.4172C593.32 39.1672 539.4 50.5139 484.04 61.5348C335.816 91.0419 138.2 128.695 -1 64.7165L-1 115L1919 115Z"
-					fill="#BE9400"></path>
-				<path
-					opacity="0.5"
-					d="M1919 115L1919 99.8488C1898.2 79.6184 1874.78 60.5092 1842.7 45.9521C1759.94 8.36622 1655 8.62498 1559.67 27.2359C1509.83 36.963 1463.53 52.2197 1416.2 65.3776C1350.73 83.586 1280.63 109.461 1206.87 112.978C1148.86 115.709 1093.43 103.951 1049.11 82.7331C998.28 58.401 949.4 23.3163 883.304 12.7746C818.6 2.43422 753.144 19.1859 692.696 36.043C632.248 52.9001 572.44 73.4181 505.624 77.2994C410.056 82.9056 324.376 55.3727 235.384 40.0777C187.064 31.7785 140.984 34.1647 96.04 47.2652C60.152 57.7014 19.24 73.0731 -1 94.4536L-1 115L1919 115Z"
-					fill="#BE9400"></path>
-				<path
-					d="M1919 115L1919 109.605C1679.11 58.4584 1416.46 46.6517 1157.67 74.2039C1088.87 81.5256 1022.9 93.4856 953.496 99.5614C859.096 107.832 773.528 87.8314 688.6 65.6364C594.312 40.9976 501.4 23.7284 397.08 28.7501C258.632 35.4585 121.144 72.5556 -1 110.027L-1 115L1919 115Z"
-					fill="#BE9400"></path>
-			</g>
-			<defs>
-				<clipPath id="clip0_2_279">
-					<rect
-						width="1920"
-						height="115"
-						fill="white"
-						transform="translate(1919 115) rotate(180)"></rect>
-				</clipPath>
-			</defs>
-		</svg>
-		<div class="w-full h-[394px] bg-[#be9400] relative overflow-hidden">
-			<img
-				class="absolute -right-96 top-10"
-				src="/margherita.webp"
-				alt="Pizza Margherita with Basilic and Tomato Sauce"
-			/>
-			<div
-				class="flex flex-col justify-center items-center w-[839px] relative gap-5 mx-auto"
+			<h3 class="font-bold text-[30px] text-[#be9400]">Blog</h3>
+			<span class="font-medium text-[16px] leading-[30px] text-black"
+				>Discover our blog and learn more about Artisan Pizzeria
+				Restaurant</span
 			>
-				<a href="/"><img src="/logo-white.svg" alt="" /></a>
-				<p
-					class="flex-grow-0 flex-shrink-0 w-[791px] h-16 text-base text-center text-white"
+		</article>
+		<div class="w-[427px] h-[589px] bg-[#fff5d3] px-8 py-5">
+			<div
+				class="px-3 py-1 mx-auto w-fit relative -top-9 bg-[#efc50e] flex justify-center items-center"
+			>
+				<span class="text-base font-semibold text-black text-nowrap"
+					>Category</span
 				>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Morbi eu cursus nisi. Nunc consectetur ipsum pharetra,congue
-					odio quis, porttitor ligula. Vestibulum viverra.
-				</p>
-				<p class="text-white">
-					<a href="tel:+33 333 333 333">+33 333 333 3333</a> | <a
-						href="mailto:artisan_pizza@info.it"
-						>artisan_pizza@info.it</a
-					>
-					| <a href="/">Via degli Artigiani 33</a>
-				</p>
+			</div>
+			<picture class="">
 				<div
-					class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5"
+					class="w-[359px] h-[222px] bg-[#efc50e] absolute -rotate-6"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="30"
-						height="30"
-						preserveAspectRatio="xMidYMid"
-						viewBox="0 0 256 256"
-						><path
-							fill="#fff"
-							d="M128 23.064c34.177 0 38.225.13 51.722.745 12.48.57 19.258 2.655 23.769 4.408 5.974 2.322 10.238 5.096 14.717 9.575 4.48 4.479 7.253 8.743 9.575 14.717 1.753 4.511 3.838 11.289 4.408 23.768.615 13.498.745 17.546.745 51.723 0 34.178-.13 38.226-.745 51.723-.57 12.48-2.655 19.257-4.408 23.768-2.322 5.974-5.096 10.239-9.575 14.718-4.479 4.479-8.743 7.253-14.717 9.574-4.511 1.753-11.289 3.839-23.769 4.408-13.495.616-17.543.746-51.722.746-34.18 0-38.228-.13-51.723-.746-12.48-.57-19.257-2.655-23.768-4.408-5.974-2.321-10.239-5.095-14.718-9.574-4.479-4.48-7.253-8.744-9.574-14.718-1.753-4.51-3.839-11.288-4.408-23.768-.616-13.497-.746-17.545-.746-51.723 0-34.177.13-38.225.746-51.722.57-12.48 2.655-19.258 4.408-23.769 2.321-5.974 5.095-10.238 9.574-14.717 4.48-4.48 8.744-7.253 14.718-9.575 4.51-1.753 11.288-3.838 23.768-4.408 13.497-.615 17.545-.745 51.723-.745M128 0C93.237 0 88.878.147 75.226.77c-13.625.622-22.93 2.786-31.071 5.95-8.418 3.271-15.556 7.648-22.672 14.764C14.367 28.6 9.991 35.738 6.72 44.155 3.555 52.297 1.392 61.602.77 75.226.147 88.878 0 93.237 0 128c0 34.763.147 39.122.77 52.774.622 13.625 2.785 22.93 5.95 31.071 3.27 8.417 7.647 15.556 14.763 22.672 7.116 7.116 14.254 11.492 22.672 14.763 8.142 3.165 17.446 5.328 31.07 5.95 13.653.623 18.012.77 52.775.77s39.122-.147 52.774-.77c13.624-.622 22.929-2.785 31.07-5.95 8.418-3.27 15.556-7.647 22.672-14.763 7.116-7.116 11.493-14.254 14.764-22.672 3.164-8.142 5.328-17.446 5.95-31.07.623-13.653.77-18.012.77-52.775s-.147-39.122-.77-52.774c-.622-13.624-2.786-22.929-5.95-31.07-3.271-8.418-7.648-15.556-14.764-22.672C227.4 14.368 220.262 9.99 211.845 6.72c-8.142-3.164-17.447-5.328-31.071-5.95C167.122.147 162.763 0 128 0Zm0 62.27C91.698 62.27 62.27 91.7 62.27 128c0 36.302 29.428 65.73 65.73 65.73 36.301 0 65.73-29.428 65.73-65.73 0-36.301-29.429-65.73-65.73-65.73Zm0 108.397c-23.564 0-42.667-19.103-42.667-42.667S104.436 85.333 128 85.333s42.667 19.103 42.667 42.667-19.103 42.667-42.667 42.667Zm83.686-110.994c0 8.484-6.876 15.36-15.36 15.36-8.483 0-15.36-6.876-15.36-15.36 0-8.483 6.877-15.36 15.36-15.36 8.484 0 15.36 6.877 15.36 15.36Z"
-						></path></svg
-					>
-					<svg
-						width="29"
-						height="28"
-						viewBox="0 0 29 28"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-						class="flex-grow-0 flex-shrink-0 w-7 h-7 relative"
-						preserveAspectRatio="none"
-					>
-						<g clip-path="url(#clip0_2_291)">
-							<path
-								d="M28.5 14C28.5 6.26719 22.2328 0 14.5 0C6.76719 0 0.5 6.26719 0.5 14C0.5 20.5625 5.02266 26.075 11.1203 27.5898V18.2766H8.23281V14H11.1203V12.157C11.1203 7.39375 13.275 5.18438 17.9563 5.18438C18.8422 5.18438 20.3734 5.35938 21.0023 5.53437V9.40625C20.6742 9.37344 20.1 9.35156 19.3836 9.35156C17.0867 9.35156 16.2008 10.2211 16.2008 12.4797V14H20.7727L19.9852 18.2766H16.1953V27.8961C23.1297 27.0594 28.5 21.1586 28.5 14Z"
-								fill="white"></path>
-						</g>
-						<defs>
-							<clipPath id="clip0_2_291">
-								<rect
-									width="28"
-									height="28"
-									fill="white"
-									transform="translate(0.5)"></rect>
-							</clipPath>
-						</defs>
-					</svg>
 				</div>
-				<p
-					class="flex-grow-0 flex-shrink-0 text-base italic text-center text-white"
+				<img
+					src="/image-3.webp"
+					class="w-[359px] h-[222px] object-cover relative z-10"
+				/>
+			</picture>
+			<div>
+				<h3
+					class="w-[363px] h-[46px] text-lg font-semibold text-left text-black my-8"
 				>
-					PRIVACY - CREDITS
+					Lorem ipsum dolor sit amen et lorem ipsum dolor sit amen et
+				</h3>
+				<p class="text-base text-left text-[#585858]">
+					<span class="text-base font-medium text-left text-[#585858]"
+						>Lorem ipsum dolor sit amet, consectetur adipiscing
+						elit. Morbi eu cursus nisi. Nunc consectetur ipsum
+						pharetra, congue odio quis, porttitor ligula.
+					</span><span
+						class="text-base font-bold text-left text-[#585858]"
+						>Read More...</span
+					>
 				</p>
+				<div class="flex flex-row flex-nowrap justify-between mt-20">
+					<span class="text-sm italic text-left text-[#585858]">
+						Nome Cognome
+					</span>
+					<span class="text-sm italic text-left text-[#585858]">
+						25/05/2024
+					</span>
+				</div>
 			</div>
 		</div>
-	</footer>
+		<div class="w-[427px] h-[589px] bg-[#fff5d3] px-8 py-5">
+			<div
+				class="px-3 py-1 mx-auto w-fit relative -top-9 bg-[#efc50e] flex justify-center items-center"
+			>
+				<span class="text-base font-semibold text-black text-nowrap"
+					>Category</span
+				>
+			</div>
+			<picture class="">
+				<div
+					class="w-[359px] h-[222px] bg-[#efc50e] absolute -rotate-6"
+				>
+				</div>
+				<img
+					src="/image-3.webp"
+					class="w-[359px] h-[222px] object-cover relative z-10"
+				/>
+			</picture>
+			<div>
+				<h3
+					class="w-[363px] h-[46px] text-lg font-semibold text-left text-black my-8"
+				>
+					Lorem ipsum dolor sit amen et lorem ipsum dolor sit amen et
+				</h3>
+				<p class="text-base text-left text-[#585858]">
+					<span class="text-base font-medium text-left text-[#585858]"
+						>Lorem ipsum dolor sit amet, consectetur adipiscing
+						elit. Morbi eu cursus nisi. Nunc consectetur ipsum
+						pharetra, congue odio quis, porttitor ligula.
+					</span><span
+						class="text-base font-bold text-left text-[#585858]"
+						>Read More...</span
+					>
+				</p>
+				<div class="flex flex-row flex-nowrap justify-between mt-20">
+					<span class="text-sm italic text-left text-[#585858]">
+						Nome Cognome
+					</span>
+					<span class="text-sm italic text-left text-[#585858]">
+						25/05/2024
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="w-[427px] h-[589px] bg-[#fff5d3] px-8 py-5">
+			<div
+				class="px-3 py-1 mx-auto w-fit relative -top-9 bg-[#efc50e] flex justify-center items-center"
+			>
+				<span class="text-base font-semibold text-black text-nowrap"
+					>Category</span
+				>
+			</div>
+			<picture class="">
+				<div
+					class="w-[359px] h-[222px] bg-[#efc50e] absolute -rotate-6"
+				>
+				</div>
+				<img
+					src="/image-3.webp"
+					class="w-[359px] h-[222px] object-cover relative z-10"
+				/>
+			</picture>
+			<div>
+				<h3
+					class="w-[363px] h-[46px] text-lg font-semibold text-left text-black my-8"
+				>
+					Lorem ipsum dolor sit amen et lorem ipsum dolor sit amen et
+				</h3>
+				<p class="text-base text-left text-[#585858]">
+					<span class="text-base font-medium text-left text-[#585858]"
+						>Lorem ipsum dolor sit amet, consectetur adipiscing
+						elit. Morbi eu cursus nisi. Nunc consectetur ipsum
+						pharetra, congue odio quis, porttitor ligula.
+					</span><span
+						class="text-base font-bold text-left text-[#585858]"
+						>Read More...</span
+					>
+				</p>
+				<div class="flex flex-row flex-nowrap justify-between mt-20">
+					<span class="text-sm italic text-left text-[#585858]">
+						Nome Cognome
+					</span>
+					<span class="text-sm italic text-left text-[#585858]">
+						25/05/2024
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="w-full flex place-content-center text-white mt-10">
+			<button
+				class="w-[198px] self-center h-[43px] rounded-[5px] bg-[#e1b000] hover:scale-105 transition-all"
+				>Read More</button
+			>
+		</div>
+	</section>
 </Layout>
+<Footer />

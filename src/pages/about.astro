@@ -1,0 +1,103 @@
+---
+import MenuButton from "../components/Buttons/MenuButton.astro";
+import Footer from "../components/Footer/Footer.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Our Restaurant">
+    <main class="flex flex-col flex-nowrap items-center justify-center gap-32">
+        <section
+            id="hero-section"
+            class="container w-full md:w-max lg:flex lg:flex-row flex-wrap grid grid-cols-1 text-center items-center justify-center lg:justify-between mx-auto mt-14 sm:min-h-[550px]"
+        >
+            <div
+                transition:name="ourRestaurant-image"
+                class="relative min-w-96 min-h-96 w-3/4 max-w-xl h-[566px] flex justify-center items-center self-center"
+            >
+                <img src="/image-3.webp" class="object-cover" />
+                <div
+                    class="w-[70px] h-[70px] absolute top-14 -left-6 sm:top-0 sm:left-0 bg-[#f6ce40] transition-all hover:animate-spin"
+                >
+                </div>
+                <div
+                    class="w-[70px] h-[70px] absolute bottom-14 -right-6 sm:bottom-0 sm:right-0 bg-[#f6ce40] transition-all hover:animate-spin"
+                >
+                </div>
+            </div>
+            <div
+                transition:name="hero-text"
+                class="max-w-2xl text-center lg:text-left flex flex-col justify-center items-center lg:block mt-10"
+            >
+                <h1
+                    class="flex flex-col text-6xl lg:text-[65px] font-bold text-balance mb-10"
+                >
+                    <span>Our restaurant,</span>
+                    <span>Our Italian pride.</span>
+                </h1>
+                <p class="text-[16px] text-wrap w-auto">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Morbi eu cursus nisi. Nunc consectetur ipsum pharetra,
+                    congue odio quis, porttitor ligula. Vestibulum viverra.
+                </p>
+                <MenuButton />
+            </div>
+        </section>
+        <section
+            class="lg:flex lg:flex-nowrap items-center justify-center place-content-center grid grid-cols-1 text-center max-w-7xl lg:gap-4 gap-20"
+        >
+            <article
+                class="max-w-md col-span-1 mx-auto flex flex-col gap-5 items-center justify-center place-content-center"
+            >
+                <div><img src="/logo.svg" alt="" /></div>
+                <h2 class="font-bold text-[30px] text-center text-black">
+                    LOREM IPSUM
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod necessitatibus, voluptatem deserunt distinctio nisi
+                    omnis beatae! Ea eaque ducimus cum porro nihil, explicabo
+                    quo deleniti voluptatem nulla voluptas sequi rerum!
+                </p>
+                <small class="text-sm"> Pizza d’asporto </small>
+            </article>
+            <article
+                class="max-w-md col-span-1 mx-auto flex flex-col gap-5 items-center justify-center place-content-center"
+            >
+                <div><img src="/logo.svg" alt="" /></div>
+                <h2 class="font-bold text-[30px] text-center text-black">
+                    LOREM IPSUM
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod necessitatibus, voluptatem deserunt distinctio nisi
+                    omnis beatae! Ea eaque ducimus cum porro nihil, explicabo
+                    quo deleniti voluptatem nulla voluptas sequi rerum!
+                </p>
+                <small class="text-sm"> Ristorante accogliente </small>
+            </article>
+            <article
+                class="max-w-md col-span-1 mx-auto flex flex-col gap-5 items-center justify-center place-content-center"
+            >
+                <div><img src="/logo.svg" alt="" /></div>
+                <h2 class="font-bold text-[30px] text-center text-black">
+                    LOREM IPSUM
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod necessitatibus, voluptatem deserunt distinctio nisi
+                    omnis beatae! Ea eaque ducimus cum porro nihil, explicabo
+                    quo deleniti voluptatem nulla voluptas sequi rerum!
+                </p>
+                <small class="text-sm"> Ingredienti di qualita’ </small>
+            </article>
+        </section>
+        <section class="text-gray-600 body-font relative w-full">
+            <div class="absolute z-20 inset-0 bg-gray-300">
+                <iframe src="https://my.atlist.com/map/4295c742-b972-478d-9d50-b29c79587479/?share=true" allow="geolocation 'self' https://my.atlist.com" width="100%" height="100%" loading="lazy" frameborder="0" scrolling="no" allowfullscreen id="atlist-embed"></iframe>
+            </div>
+            <div class="container h-96 px-5 py-10 mx-auto flex">
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
