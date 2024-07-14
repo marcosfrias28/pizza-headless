@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react'
-import useCartStore from '../../stores/CartStore'
+import useCartStore from '../../hooks/useCartStore'
 import MinusIcon from '../Icons/MinusIcon'
 import PlusIcon from '../Icons/PlusIcon'
 import XIcon from '../Icons/XIcon'
-import axios from 'axios'
 
 type SVGProps = React.SVGProps<SVGSVGElement>
 

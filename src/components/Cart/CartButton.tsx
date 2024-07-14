@@ -1,4 +1,4 @@
-import useCartStore from '../../stores/CartStore'
+import useCartStore from '../../hooks/useCartStore'
 import { ShoppingCartIcon } from './ShoppingCart'
 
 function CartButton () {
