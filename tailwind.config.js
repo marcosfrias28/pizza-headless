@@ -7,8 +7,15 @@ module.exports = {
   theme: {
     extend: {
       animation: {
+        'modalActive': 'modalActive 0.3s ease-in-out',
         'spin-slow': 'spin 30s linear infinite'
 			  },
+      keyframes: {
+        modalActive: {
+          '0%': { opacity: '0', transform: 'translateY(-100%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
+        }
+      },
       fontFamily: {
         pattaya: ['Pattaya', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-serif']

@@ -1,0 +1,37 @@
+---
+import Mail from "../Icons/Mail.astro";
+import Address from "../Icons/Address.astro";
+import Phone from "../Icons/Phone.astro";
+---
+
+<div class="flex flex-col justify-start items-start w-full gap-5">
+    <div class="flex justify-start items-start relative gap-[26px]">
+        <Phone />
+        <a
+            href="tel:+33333333333"
+            class="w-[239.48px] h-[42.87px] text-lg font-bold text-left text-black"
+        >
+            + 33 333 333 3333
+        </a>
+    </div>
+    <div class="flex justify-start items-start relative gap-[26px]">
+        <Mail/>
+        <a
+            href="mailto:artisan_pizza@info.com"
+            class="w-[331.13px] h-[42.87px] text-lg font-bold text-left text-black"
+        >
+            artisan_pizza@info.com
+        </a>
+    </div>
+    <div class="flex justify-start items-start relative gap-[26px]">
+        <Address />
+        <a
+            referrerpolicy="no-referrer"
+            href="https://maps.app.goo.gl/HtVpb4yHEMkJyXM96"
+            target="_blank"
+            class="w-[292.7px] h-[42.87px] text-lg font-bold text-left text-black"
+        >
+            Via Confalonieri, 7, 20821 Meda MB
+        </a>
+    </div>
+</div>
