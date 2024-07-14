@@ -1,15 +1,14 @@
 import type { APIContext, APIRoute } from "astro";
-import useCartStore from "../../../stores/CartStore";
 import Stripe from 'stripe'
+import useCartStore from "../../../hooks/useCartStore";
 
 // This is your test secret API key.
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '')
 
-const YOUR_DOMAIN = Astro.url;
-
 export const POST: APIRoute = async (context: APIContext) => {
-
+ console.log(context.request.url);
+ 
   const { cart } = useCartStore()
   console.log(cart);
 
@@ -21,11 +20,11 @@ export const POST: APIRoute = async (context: APIContext) => {
       }
     ],
     mode: 'payment',
-    success_url: `${YOUR_DOMAIN}/success`,
-    cancel_url: `${YOUR_DOMAIN}/cancelled`,
+    success_url: `/success`,
+    cancel_url: `/cancelled`,
   })
 
-  Response.redirect(`${YOUR_DOMAIN}/`, 303)
+  Response.redirect(`/`, 303)
   return new Response(
     JSON.stringify('Succesfull'), {
     status: 303,
