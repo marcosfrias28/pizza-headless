@@ -20,6 +20,15 @@ dependencies:
   '@astrojs/vercel':
     specifier: 7.7.2
     version: 7.7.2(astro@4.11.5)(react@18.3.1)
+  '@fontsource-variable/montserrat':
+    specifier: ^5.0.19
+    version: 5.0.19
+  '@fontsource/montserrat':
+    specifier: ^5.0.18
+    version: 5.0.18
+  '@fontsource/pattaya':
+    specifier: ^5.0.20
+    version: 5.0.20
   '@tanstack/react-query':
     specifier: ^5.50.1
     version: 5.50.1(react@18.3.1)
@@ -861,6 +870,18 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fontsource-variable/montserrat@5.0.19:
+    resolution: {integrity: sha512-vOlVjdGock2yBOeBbg5qexPa1TJM/PS8Nx9YlF6DFEtFf/Y5ayDbZRvV/WPj8W2vk7/aDxUEtTAp/Qp8wK9hNQ==}
+    dev: false
+
+  /@fontsource/montserrat@5.0.18:
+    resolution: {integrity: sha512-85JBs2rCdFK/VBdSb401e2lXk5gynVo2zi3Rh2Guem4WNtT2q52+V90o3KzjmajY3TPJvCZA/kI7R05ev7148g==}
+    dev: false
+
+  /@fontsource/pattaya@5.0.20:
+    resolution: {integrity: sha512-4HvmAFuYeP5m0lRbkT/5auK3CGAY1f7BdZPOmGl5VjCLlOMNNSox3GjdwHgcxlANp2kCPhPc3s7fyEhheYyvaQ==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}

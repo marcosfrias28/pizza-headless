@@ -1,5 +1,5 @@
 import plugin from 'tailwindcss-animated'
-
+import defaultTheme from 'tailwindcss/defaultTheme'
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
@@ -17,8 +17,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        pattaya: ['Pattaya', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif']
+        pattaya: ["Pattaya", ...defaultTheme.fontFamily.sans],
+        montserrat: ['Montserrat', ...defaultTheme.fontFamily.sans]
       },
       width: {
         max: '1325px'

@@ -106,7 +106,7 @@ function Menu({ home } : { home : boolean }) {
                       handleAddCartItem({ id, name, price, quantity: 1, cover })
                     }} className='text-center rounded-lg px-7 py-3 mx-10 bg-bright-sun-400 text-white justify-self-end font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer'
                   >
-                    <span>Add to order</span>
+                    Add to order
                   </button>)
                 }
 
