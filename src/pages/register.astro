@@ -1,11 +1,7 @@
 ---
+export const prerender = true
 import Layout from "../layouts/Layout.astro";
 import RegisterForm from "../components/Register/RegisterForm.tsx";
-import { db, Users } from 'astro:db';
-
-const users = await db.select().from(Users).all();
-console.log(users);
-
 ---
 
 <Layout title="Register - Pizza Headless.">
