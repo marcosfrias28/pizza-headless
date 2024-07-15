@@ -10,7 +10,7 @@ config()
 export default defineConfig({
   integrations: [tailwind(), react(), db()],
   output: 'server',
-  adapter: vercel(),
-  prefetch: true,
-  site: 'https://pizza-headless.vercel.app'
+  adapter: vercel({
+    webAnalytics: {enabled: true},
+  }),
 })

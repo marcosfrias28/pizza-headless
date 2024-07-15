@@ -5,56 +5,52 @@ import { TrashIcon } from '../Cart/ShoppingCart.jsx'
 import LoadingArticle from '../Loading/LoadingArticle.jsx'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import type { Pizza } from '../../types/PizzaType.js'
-import { useEffect } from 'react'
+import {  useEffect, useState } from 'react'
 import { useGetPizzaData } from '../../hooks/useGetPizzaData'
 import { useMenuStore } from '../../hooks/useMenuStore'
 import useCartStore from '../../hooks/useCartStore.js'
 
 const queryClient = new QueryClient()
 
-export function PizzaMenu({home} : {home : boolean}) {
+export function PizzaMenu({ home }: { home: boolean }) {
   return (
-    <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
       <Menu home={home} />
     </QueryClientProvider>
   )
 }
 
 
-function Menu({ home } : { home : boolean }) {
-
+function Menu({ home }: { home: boolean }) {
+  const [isClient, setIsClient] = useState(false)
   const { cart, setCart, handleDecrement, handleIncrement, handleRemove } = useCartStore()
   const { filter, name } = useMenuStore()
   const { pizzas, isLoading, fetchNextPage, refetch } = useGetPizzaData()
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
     refetch()
-  }, [filter, name])
+  }, [name])
 
   function handleAddCartItem(item: Item) {
     setCart([...cart, item])
   }
-
-  isLoading && [...Array(4)].map((_, i) => (
-    <LoadingArticle key={i + 10} />
-  ))
+  if (!isClient) return null
 
   return (
-    <>
+    <main>
       <section
         id='cards'
         className='w-full min-h-72 gap-6 mx-auto my-14 flex flex-col md:flex-row flex-wrap justify-center items-center max-w-screen-2xl'
       >
-        {isLoading && !pizzas && [...Array(home ? 4 : 12)].map((_, i) => (
-          <LoadingArticle key={i + 10} />
-        ))}
-
+        {isLoading && <LoadingArticle home={home} />}
         {pizzas &&
           pizzas.map(({ id, cover, name, price, ingredients }: Pizza, index) => {
-            const ItemOnCart = cart.find((item : Item) => item.id === id)
-
+            const ItemOnCart = cart.find((item: Item) => item.id === id)
             if (index > 3 && home) return null
-
             return (
               <article
                 key={id}
@@ -66,14 +62,12 @@ function Menu({ home } : { home : boolean }) {
                 </div>
                 <div className='mx-4 mb-7'>
                   <div className='flex flex-row flex-nowrap justify-between gap-10'>
-                    <>
-                      <span className='text-black font-semibold'>
-                        {name}
-                      </span>
-                      <span className='text-red-500 font-semibold'>
-                        {price} €
-                      </span>
-                    </>
+                    <span className='text-black font-semibold'>
+                      {name}
+                    </span>
+                    <span className='text-red-500 font-semibold'>
+                      {price} €
+                    </span>
                   </div>
                   <div className='text-gray-500 w-full'>
                     <p className='flex flex-wrap max-h-7 h-full gap-2 text-ellipsis text-pretty text-xs'>
@@ -114,10 +108,12 @@ function Menu({ home } : { home : boolean }) {
             )
           })}
       </section>
-      <div className='w-screen flex items-center justify-center py-20'>
-        <button onClick={async () => await fetchNextPage()} className={`${home ? 'hidden' : ''} absolute mx-auto flex justify-center items-center gap-2 rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>Load More</button>
-      </div>
-    </>
+      {!home && (
+        <div className='w-screen flex items-center justify-center mt-10 pb-20'>
+          <button onClick={async () => await fetchNextPage()} className={`absolute mx-auto flex justify-center items-center gap-2 rounded-lg px-7 py-3 bg-bright-sun-400 text-white mt-8 font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>Load More</button>
+        </div>
+      )}
+    </main>
   )
 }
 

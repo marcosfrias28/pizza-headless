@@ -20,7 +20,10 @@ export default function ShoppingCart () {
               <div className='flex items-center justify-between'>
                 <h3 className='text-lg font-medium'>Shopping Cart</h3>
                 <div className='flex flex-nowrap gap-4'>
-                  <button onClick={clearCart} className={`${cart[0] ? '' : 'pointer-events-none'}`}>
+                  <button onClick={() => {
+                    clearCart()
+                    setIsCartOpen(false)
+                  }} className={`${cart[0] ? '' : 'pointer-events-none'}`}>
                     <TrashIcon className='h-4 w-4' />
                   </button>
                   <button onClick={() => setIsCartOpen(false)}>

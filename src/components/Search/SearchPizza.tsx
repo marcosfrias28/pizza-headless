@@ -3,21 +3,21 @@ import { useEffect, useState } from 'react'
 import type { Pizza } from '../../types/PizzaType';
 import { useMenuStore } from '../../hooks/useMenuStore';
 
-function SearchFormPizza () {
+function SearchFormPizza() {
   const [nameList, setNameList] = useState<string[]>([]);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const { filter, setFilter, setName } = useMenuStore()
 
   useEffect(() => {
-    axios.get('api/pizza/ingredients').then(res => setIngredients(res.data?.map((i : {id: string, name: string}) => i.name)));
-    axios.get('api/pizza?perPage=50').then(res => setNameList(res.data?.map((p : Pizza) => p.name)));
+    axios.get('api/pizza/ingredients').then(res => setIngredients(res.data?.map((i: { id: string, name: string }) => i.name)));
+    axios.get('api/pizza?perPage=50').then(res => setNameList(res.data?.map((p: Pizza) => p.name)));
   }, [])
 
   return (
     <form className='flex gap-4 mt-14'>
       <label htmlFor='pizza-ingredient-list' className=' sr-only'>Choose a flavor:</label>
       <input
-        list={filter === 'Ingredients' ? 'pizza-ingredients' : 'pizza-names'}
+        list={filter === 'ingredients' ? 'pizza-ingredients' : 'pizza-names'}
         id='pizza-ingredient-list'
         name='pizza-ingredient-list'
         placeholder='Search...'
@@ -26,26 +26,27 @@ function SearchFormPizza () {
       />
       <datalist id='pizza-ingredients'>
         {
-                   ingredients[0] && ingredients.map((ingredient: string) => (
-                      <option key={ingredient}>{ingredient}</option>
-                    ))
-                }
+          ingredients[0] && ingredients.map((ingredient: string) => (
+            <option key={ingredient}>{ingredient}</option>
+          ))
+        }
       </datalist>
       <datalist id='pizza-names'>
         {
-                    nameList && nameList.map((pizzaName: string) => (
-                      <option key={pizzaName}>{pizzaName}</option>
-                    ))
-                }
+          nameList[0] && nameList.map((pizzaName: string) => (
+            <option key={pizzaName}>{pizzaName}</option>
+          ))
+        }
       </datalist>
       <select
         required
         id='filter-type'
+        name='filter-type'
         className='p-2 rounded-xl bg-[#dddace] text-neutral-400'
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilter(e.currentTarget.value)}
       >
-        <option value='Name'>Name</option>
-        <option value='Ingredients'>Ingredients</option>
+        <option value='name'>Name</option>
+        <option value='ingredients'>Ingredients</option>
       </select>
     </form>
   )

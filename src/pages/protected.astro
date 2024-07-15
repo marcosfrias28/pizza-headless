@@ -12,25 +12,15 @@ if (token) {
 
 user = payload?.user;
 
+if (!user){
+   return Astro.redirect('/login')
+}
 // TODO - Implement user profile page
 ---
 
 <Layout title="User Profile">
-    {
-        !user && (
-            <>
-                <div class="w-full min-h-dvh h-full flex items-center justify-center">
-                    <p>Access Not Authorized</p>
-                </div>
-            </>
-        )
-    }
-    {
-        user && (
-            <div class="w-full min-h-dvh h-full flex flex-col items-center justify-center">
-                <h1>Welcome, {user.name}</h1>
-                <p>This page is under maintenan</p> 
-            </div>
-        )
-    }
+    <div class="w-full min-h-dvh h-full flex flex-col items-center justify-center">
+        <h1>Welcome, {user.name}</h1>
+        <p>This page is under maintenan</p> 
+    </div>
 </Layout>

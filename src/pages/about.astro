@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 import MenuButton from "../components/Buttons/MenuButton.astro";
 import ContactModal from "../components/Contact/ContactModal.astro";
 import Footer from "../components/Footer/Footer.astro";
@@ -101,7 +100,7 @@ import Layout from "../layouts/Layout.astro";
                     src="https://snazzymaps.com/embed/624196"
                     width="100%"
                     height="100%"
-                    loading="eager"></iframe>
+                    loading="lazy"></iframe>
             </div>
             <div>
                 <label for="contact-button" class="z-20 absolute mt-10 rounded-lg flex items-center justify-center gap-2 w-fit left-10 px-7 py-3 bg-bright-sun-400 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"> Contact us <span class="peer-checked:block hidden"> <XIcon client:load> </span> </label>
